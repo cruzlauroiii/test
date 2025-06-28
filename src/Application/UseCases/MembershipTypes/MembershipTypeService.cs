@@ -1,9 +1,10 @@
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.MembershipTypes;
 
-public class MembershipTypeService
+public class MembershipTypeService : IMembershipTypeService
 {
     private readonly IMembershipTypeRepository _membershipTypeRepository;
 

@@ -1,9 +1,10 @@
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.IPadUserOptions;
 
-public class IPadUserOptionService
+public class IPadUserOptionService : IIPadUserOptionService
 {
     private readonly IIPadUserOptionRepository _iPadUserOptionRepository;
 

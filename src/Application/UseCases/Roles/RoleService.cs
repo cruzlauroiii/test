@@ -1,10 +1,11 @@
 using Application.DTOs;
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.Roles;
 
-public class RoleService
+public class RoleService : IRoleService
 {
     private readonly IRoleRepository _roleRepository;
     private readonly IRolePropertyRepository _rolePropertyRepository;

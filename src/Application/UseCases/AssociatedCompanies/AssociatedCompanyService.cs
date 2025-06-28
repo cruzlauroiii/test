@@ -1,9 +1,10 @@
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.AssociatedCompanies;
 
-public class AssociatedCompanyService
+public class AssociatedCompanyService : IAssociatedCompanyService
 {
     private readonly IAssociatedCompanyRepository _associatedCompanyRepository;
 

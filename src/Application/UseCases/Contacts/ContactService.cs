@@ -1,10 +1,11 @@
 using Application.DTOs;
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.Contacts;
 
-public class ContactService
+public class ContactService : IContactService
 {
     private readonly IContactRepository _contactRepository;
 
