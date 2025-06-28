@@ -1,4 +1,3 @@
-using BlazorWebApp.Client.Pages;
 using BlazorWebApp.Components;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
@@ -15,7 +14,7 @@ namespace BlazorWebApp;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
@@ -80,13 +79,16 @@ public class Program
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode()
-            .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+            .AddAdditionalAssemblies(typeof(BlazorWebApp.Client._Imports).Assembly);
 
         // Ensure database is created
         using (var scope = app.Services.CreateScope())
         {
             var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var authService = scope.ServiceProvider.GetRequiredService<IAuthService>();
+            
             context.Database.EnsureCreated();
+            await Infrastructure.Data.DatabaseSeeder.SeedAsync(context, authService);
         }
 
         app.Run();

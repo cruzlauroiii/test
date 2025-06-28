@@ -1,0 +1,23 @@
+@page "/driver"
+@attribute [Authorize(Roles = "Driver")]
+
+<PageTitle>Driver Operations</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h2>Driver Operations</h2>
+            <p>Welcome to the Driver Operations page. This page is only accessible to staff with the Driver role.</p>
+            
+            <div class="alert alert-info">
+                <h4>Available Operations:</h4>
+                <ul>
+                    <li>View assigned routes</li>
+                    <li>Update delivery status</li>
+                    <li>Record vehicle inspections</li>
+                    <li>Submit timesheets</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

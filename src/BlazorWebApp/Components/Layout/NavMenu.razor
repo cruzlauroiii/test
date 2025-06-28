@@ -1,6 +1,6 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">BlazorWebApp</a>
+        <a class="navbar-brand" href="">Staff Management</a>
     </div>
 </div>
 
@@ -14,17 +14,89 @@
             </NavLink>
         </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
+        <AuthorizeView>
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="staff">
+                        <span class="bi bi-people-fill" aria-hidden="true"></span> Staff Management
+                    </NavLink>
+                </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
+                <AuthorizeView Roles="Broker">
+                    <Authorized Context="brokerContext">
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="broker">
+                                <span class="bi bi-briefcase-fill" aria-hidden="true"></span> Broker Operations
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+
+                <AuthorizeView Roles="Driver">
+                    <Authorized Context="driverContext">
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="driver">
+                                <span class="bi bi-truck" aria-hidden="true"></span> Driver Operations
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+
+                <AuthorizeView Roles="Forklift">
+                    <Authorized Context="forkliftContext">
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="forklift">
+                                <span class="bi bi-box-seam" aria-hidden="true"></span> Forklift Operations
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+
+                <AuthorizeView Roles="Fumigation">
+                    <Authorized Context="fumigationContext">
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="fumigation">
+                                <span class="bi bi-bug-fill" aria-hidden="true"></span> Fumigation Operations
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+
+                <AuthorizeView Roles="ITV">
+                    <Authorized Context="itvContext">
+                        <div class="nav-item px-3">
+                            <NavLink class="nav-link" href="itv">
+                                <span class="bi bi-shield-check" aria-hidden="true"></span> ITV Operations
+                            </NavLink>
+                        </div>
+                    </Authorized>
+                </AuthorizeView>
+
+                <div class="nav-item px-3">
+                    <a class="nav-link" href="javascript:void(0)" @onclick="Logout">
+                        <span class="bi bi-box-arrow-right" aria-hidden="true"></span> Logout
+                    </a>
+                </div>
+            </Authorized>
+            <NotAuthorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="login">
+                        <span class="bi bi-box-arrow-in-right" aria-hidden="true"></span> Login
+                    </NavLink>
+                </div>
+            </NotAuthorized>
+        </AuthorizeView>
     </nav>
 </div>
+
+@code {
+    [Inject] private IJSRuntime JSRuntime { get; set; } = default!;
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+
+    private async Task Logout()
+    {
+        await JSRuntime.InvokeVoidAsync("localStorage.removeItem", "authToken");
+        Navigation.NavigateTo("/login", forceLoad: true);
+    }
+}
 
