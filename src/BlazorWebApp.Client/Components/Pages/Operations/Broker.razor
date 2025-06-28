@@ -1,23 +1,146 @@
 @page "/broker"
-@attribute [Authorize(Roles = "Broker")]
+@using Application.DTOs
+@using Application.UseCases.Roles
+@using Application.UseCases.Staff
+@using Microsoft.Extensions.Configuration
+@inject RoleService RoleService
+@inject StaffService StaffService
+@inject IConfiguration Configuration
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@attribute [Authorize(Policy = "BrokerRole")]
 
 <PageTitle>Broker Operations</PageTitle>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h2>Broker Operations</h2>
-            <p>Welcome to the Broker Operations page. This page is only accessible to staff with the Broker role.</p>
-            
-            <div class="alert alert-info">
-                <h4>Available Operations:</h4>
-                <ul>
-                    <li>Manage shipment documentation</li>
-                    <li>Handle customs clearance</li>
-                    <li>Coordinate with clients</li>
-                    <li>Track shipment status</li>
-                </ul>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Broker Operations</h2>
+                <button class="btn btn-primary" @onclick="SetBrokerRoleOnly">
+                    <i class="fas fa-briefcase"></i> Switch to Broker Only
+                </button>
             </div>
+
+            @if (isLoading)
+            {
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else if (brokerData.Any())
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Broker Configuration</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var property in brokerData)
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">@property.Key</h6>
+                                            <p class="card-text">@property.Value</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <h4>No Broker Configuration Found</h4>
+                    <p>Broker role properties are not configured yet.</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(message))
+            {
+                <div class="alert alert-success mt-3">
+                    @message
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-danger mt-3">
+                    @errorMessage
+                </div>
+            }
         </div>
     </div>
 </div>
+
+@code {
+    private List<KeyValuePair<string, string>> brokerData = new();
+    private bool isLoading = true;
+    private string message = string.Empty;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadBrokerData();
+    }
+
+    private async Task LoadBrokerData()
+    {
+        isLoading = true;
+        try
+        {
+            var data = new List<KeyValuePair<string, string>>();
+            
+            // For now, use hardcoded values. In a real implementation,
+            // you would get this data from the membership service
+            data.Add(new KeyValuePair<string, string>("username", "BROKER001"));
+            data.Add(new KeyValuePair<string, string>("password", "brokerpass"));
+            data.Add(new KeyValuePair<string, string>("memberid", "1001"));
+            data.Add(new KeyValuePair<string, string>("membertype", "Standard"));
+            data.Add(new KeyValuePair<string, string>("staffid", "100"));
+            data.Add(new KeyValuePair<string, string>("fullname", "Sample Broker Company"));
+            data.Add(new KeyValuePair<string, string>("primarycompany", "Primary Corp"));
+            data.Add(new KeyValuePair<string, string>("CompGroup", "Group A"));
+            data.Add(new KeyValuePair<string, string>("company_logo", "/logos/company.png"));
+            data.Add(new KeyValuePair<string, string>("company_reportlogo", "/logos/report.png"));
+
+            // Add configuration values from appsettings
+            var brokerSettings = Configuration.GetSection("RoleSettings:Broker");
+            data.Add(new KeyValuePair<string, string>("stafftypeid", brokerSettings["StaffTypeId"] ?? "6"));
+            data.Add(new KeyValuePair<string, string>("accesslevel", brokerSettings["AccessLevel"] ?? "3"));
+            data.Add(new KeyValuePair<string, string>("iPageSize", brokerSettings["IPageSize"] ?? "20"));
+            data.Add(new KeyValuePair<string, string>("allowonlinesupport", brokerSettings["AllowOnlineSupport"] ?? "F"));
+            data.Add(new KeyValuePair<string, string>("logintype", "ITV_DRIVER"));
+
+            brokerData = data;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error loading broker data: " + ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task SetBrokerRoleOnly()
+    {
+        try
+        {
+            // This would need to be implemented in StaffService to clear all roles except Broker
+            message = "Switched to Broker role only. All other roles have been removed for this session.";
+            errorMessage = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error switching to broker role: " + ex.Message;
+            message = string.Empty;
+        }
+    }
+}

@@ -7,10 +7,12 @@ public interface IStaffRepository
     Task<IEnumerable<Staff>> GetAllAsync();
     Task<Staff?> GetByIdAsync(int id);
     Task<Staff?> GetByUsernameAsync(string username);
+    Task<Staff?> GetByStaffIdAsync(int staffId);
     Task<Staff> CreateAsync(Staff staff);
     Task<Staff> UpdateAsync(Staff staff);
     Task<bool> DeleteAsync(int id);
     Task<bool> ExistsAsync(string username);
+    Task<bool> ExistsByStaffIdAsync(int staffId);
 }
 
 public interface IRoleRepository
@@ -32,6 +34,65 @@ public interface IRolePropertyRepository
     Task<RoleProperty> UpdateAsync(RoleProperty roleProperty);
     Task<bool> DeleteAsync(int id);
     Task<bool> DeleteByRoleIdAndKeyAsync(int roleId, string key);
+}
+
+public interface IMembershipRepository
+{
+    Task<IEnumerable<Membership>> GetAllAsync();
+    Task<Membership?> GetByIdAsync(int id);
+    Task<IEnumerable<Membership>> GetByStaffIdAsync(int staffId);
+    Task<Membership> CreateAsync(Membership membership);
+    Task<Membership> UpdateAsync(Membership membership);
+    Task<bool> DeleteAsync(int id);
+}
+
+public interface IMembershipTypeRepository
+{
+    Task<IEnumerable<MembershipType>> GetAllAsync();
+    Task<MembershipType?> GetByIdAsync(int id);
+    Task<IEnumerable<MembershipType>> GetByStaffIdAsync(int staffId);
+    Task<MembershipType> CreateAsync(MembershipType membershipType);
+    Task<MembershipType> UpdateAsync(MembershipType membershipType);
+    Task<bool> DeleteAsync(int id);
+}
+
+public interface IContactRepository
+{
+    Task<IEnumerable<Contact>> GetAllAsync();
+    Task<Contact?> GetByIdAsync(int id);
+    Task<Contact> CreateAsync(Contact contact);
+    Task<Contact> UpdateAsync(Contact contact);
+    Task<bool> DeleteAsync(int id);
+}
+
+public interface IAssociatedCompanyRepository
+{
+    Task<IEnumerable<AssociatedCompany>> GetAllAsync();
+    Task<AssociatedCompany?> GetByIdAsync(int id);
+    Task<AssociatedCompany?> GetByCompanyCodeAsync(string companyCode);
+    Task<AssociatedCompany> CreateAsync(AssociatedCompany associatedCompany);
+    Task<AssociatedCompany> UpdateAsync(AssociatedCompany associatedCompany);
+    Task<bool> DeleteAsync(int id);
+}
+
+public interface IIPadUserOptionRepository
+{
+    Task<IEnumerable<IPadUserOption>> GetAllAsync();
+    Task<IPadUserOption?> GetByIdAsync(int id);
+    Task<IPadUserOption?> GetByStaffIdAsync(int staffId);
+    Task<IPadUserOption> CreateAsync(IPadUserOption iPadUserOption);
+    Task<IPadUserOption> UpdateAsync(IPadUserOption iPadUserOption);
+    Task<bool> DeleteAsync(int id);
+}
+
+public interface IDeliveryPreStartRepository
+{
+    Task<IEnumerable<DeliveryPreStart>> GetAllAsync();
+    Task<DeliveryPreStart?> GetByIdAsync(int id);
+    Task<DeliveryPreStart?> GetByPreStartIdAsync(int preStartId);
+    Task<DeliveryPreStart> CreateAsync(DeliveryPreStart deliveryPreStart);
+    Task<DeliveryPreStart> UpdateAsync(DeliveryPreStart deliveryPreStart);
+    Task<bool> DeleteAsync(int id);
 }
 
 public interface IAuthService

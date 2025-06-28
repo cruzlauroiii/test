@@ -3,7 +3,11 @@ namespace Application.DTOs;
 public class StaffDto
 {
     public int Id { get; set; }
+    public int StaffId { get; set; }
     public string Username { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+    public string HashedPassword { get; set; } = string.Empty;
+    public string PrimaryCompany { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
@@ -15,8 +19,10 @@ public class StaffDto
 
 public class CreateStaffDto
 {
+    public int StaffId { get; set; }
     public string Username { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
+    public string PrimaryCompany { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
@@ -26,6 +32,8 @@ public class CreateStaffDto
 public class UpdateStaffDto
 {
     public int Id { get; set; }
+    public int StaffId { get; set; }
+    public string PrimaryCompany { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;

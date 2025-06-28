@@ -18,8 +18,8 @@ public class Program
         // Configure HttpClient
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-        // Add authorization
-        builder.Services.AddAuthorizationCore();
+        // Add authorization with policies
+        builder.Services.ConfigureWebsiteDependencies();
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
         // Add application services  
