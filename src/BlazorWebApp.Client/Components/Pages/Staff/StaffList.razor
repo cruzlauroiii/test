@@ -1,8 +1,8 @@
 @page "/staff"
-@using Application.DTOs
-@using Application.UseCases.Staff
+@using Domain.DTOs
+@using Application.Interfaces
 @using Domain.Entities
-@inject StaffService StaffService
+@inject IStaffService StaffService
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 @attribute [Authorize]

@@ -1,8 +1,8 @@
 @page "/staff/edit/{id:int}"
-@using Application.DTOs
-@using Application.UseCases.Staff
+@using Domain.DTOs
+@using Application.Interfaces
 @using Domain.Interfaces
-@inject StaffService StaffService
+@inject IStaffService StaffService
 @inject IRoleRepository RoleRepository
 @inject NavigationManager Navigation
 @attribute [Authorize]

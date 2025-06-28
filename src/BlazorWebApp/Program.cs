@@ -1,13 +1,19 @@
 using BlazorWebApp.Components;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
-using Infrastructure.Repositories;
+using Infrastructure.Data.Repositories.Internal;
 using Infrastructure.Services;
+using Infrastructure.Services.UseCases.Staff;
+using Infrastructure.Services.UseCases.Auth;
+using Infrastructure.Services.UseCases.Roles;
+using Infrastructure.Services.UseCases.Memberships;
+using Infrastructure.Services.UseCases.MembershipTypes;
+using Infrastructure.Services.UseCases.Contacts;
+using Infrastructure.Services.UseCases.AssociatedCompanies;
+using Infrastructure.Services.UseCases.IPadUserOptions;
+using Infrastructure.Services.UseCases.DeliveryPreStarts;
 using Domain.Interfaces;
 using Application.Interfaces;
-using Application.UseCases.Staff;
-using Application.UseCases.Auth;
-using Application.UseCases.Roles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -24,6 +30,9 @@ public class Program
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
+
+        // Add API controllers
+        builder.Services.AddControllers();
 
         // Database
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -44,15 +53,15 @@ public class Program
         builder.Services.AddScoped<IAuthService, Infrastructure.Services.AuthService>();
         builder.Services.AddScoped<IRoleConfigurationService, Infrastructure.Services.RoleConfigurationService>();
         builder.Services.AddScoped<ISessionService, Infrastructure.Services.SessionService>();
-        builder.Services.AddScoped<IStaffService, StaffService>();
-        builder.Services.AddScoped<IAuthApplicationService, Application.UseCases.Auth.AuthService>();
-        builder.Services.AddScoped<IRoleService, Application.UseCases.Roles.RoleService>();
-        builder.Services.AddScoped<IMembershipService, Application.UseCases.Memberships.MembershipService>();
-        builder.Services.AddScoped<IMembershipTypeService, Application.UseCases.MembershipTypes.MembershipTypeService>();
-        builder.Services.AddScoped<IContactService, Application.UseCases.Contacts.ContactService>();
-        builder.Services.AddScoped<IAssociatedCompanyService, Application.UseCases.AssociatedCompanies.AssociatedCompanyService>();
-        builder.Services.AddScoped<IIPadUserOptionService, Application.UseCases.IPadUserOptions.IPadUserOptionService>();
-        builder.Services.AddScoped<IDeliveryPreStartService, Application.UseCases.DeliveryPreStarts.DeliveryPreStartService>();
+        builder.Services.AddScoped<IStaffService, Infrastructure.Services.UseCases.Staff.StaffService>();
+        builder.Services.AddScoped<IAuthApplicationService, Infrastructure.Services.UseCases.Auth.AuthService>();
+        builder.Services.AddScoped<IRoleService, Infrastructure.Services.UseCases.Roles.RoleService>();
+        builder.Services.AddScoped<IMembershipService, Infrastructure.Services.UseCases.Memberships.MembershipService>();
+        builder.Services.AddScoped<IMembershipTypeService, Infrastructure.Services.UseCases.MembershipTypes.MembershipTypeService>();
+        builder.Services.AddScoped<IContactService, Infrastructure.Services.UseCases.Contacts.ContactService>();
+        builder.Services.AddScoped<IAssociatedCompanyService, Infrastructure.Services.UseCases.AssociatedCompanies.AssociatedCompanyService>();
+        builder.Services.AddScoped<IIPadUserOptionService, Infrastructure.Services.UseCases.IPadUserOptions.IPadUserOptionService>();
+        builder.Services.AddScoped<IDeliveryPreStartService, Infrastructure.Services.UseCases.DeliveryPreStarts.DeliveryPreStartService>();
 
         // Authentication
         var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-here-must-be-at-least-32-characters";
@@ -98,6 +107,9 @@ public class Program
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode()
             .AddAdditionalAssemblies(typeof(BlazorWebApp.Client._Imports).Assembly);
+
+        // Map API controllers
+        app.MapControllers();
 
         // Ensure database is created
         using (var scope = app.Services.CreateScope())

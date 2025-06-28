@@ -1,8 +1,8 @@
 @page "/fumigation"
-@using Application.DTOs
-@using Application.UseCases.Roles
+@using Domain.DTOs
+@using Application.Interfaces
 @using Domain.Interfaces
-@inject RoleService RoleService
+@inject IRoleService RoleService
 @inject IRoleConfigurationService RoleConfigurationService
 @inject ISessionService SessionService
 @inject NavigationManager Navigation
