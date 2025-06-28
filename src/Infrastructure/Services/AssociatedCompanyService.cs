@@ -5,7 +5,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Services;
 
-public class AssociatedCompanyService : IAssociatedCompanyService
+public class AssociatedCompanyService
 {
     private readonly IAssociatedCompanyRepository _associatedCompanyRepository;
 

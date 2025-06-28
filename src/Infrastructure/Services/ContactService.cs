@@ -5,7 +5,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Services;
 
-public class ContactService : IContactService
+public class ContactService
 {
     private readonly IContactRepository _contactRepository;
 

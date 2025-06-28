@@ -1,14 +1,5 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
-using Application.UseCases.Staff;
-using Application.UseCases.Auth;
-using Application.UseCases.Roles;
-using Application.UseCases.Memberships;
-using Application.UseCases.MembershipTypes;
-using Application.UseCases.Contacts;
-using Application.UseCases.AssociatedCompanies;
-using Application.UseCases.IPadUserOptions;
-using Application.UseCases.DeliveryPreStarts;
 
 namespace BlazorWebApp.Client;
 
@@ -28,16 +19,8 @@ public class Program
         builder.Services.ConfigureWebsiteDependencies();
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
-        // Add application services  
-        builder.Services.AddScoped<StaffService>();
-        builder.Services.AddScoped<Application.UseCases.Auth.AuthService>();
-        builder.Services.AddScoped<RoleService>();
-        builder.Services.AddScoped<MembershipService>();
-        builder.Services.AddScoped<MembershipTypeService>();
-        builder.Services.AddScoped<ContactService>();
-        builder.Services.AddScoped<AssociatedCompanyService>();
-        builder.Services.AddScoped<IPadUserOptionService>();
-        builder.Services.AddScoped<DeliveryPreStartService>();
+        // Services will be provided by the server
+        // No need to register services here in interactive mode
 
         await builder.Build().RunAsync();
     }

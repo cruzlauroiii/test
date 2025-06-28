@@ -5,7 +5,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Services;
 
-public class RoleService : IRoleService
+public class RoleService
 {
     private readonly IRoleRepository _roleRepository;
     private readonly IRolePropertyRepository _rolePropertyRepository;

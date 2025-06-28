@@ -5,7 +5,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Services;
 
-public class DeliveryPreStartService : IDeliveryPreStartService
+public class DeliveryPreStartService
 {
     private readonly IDeliveryPreStartRepository _deliveryPreStartRepository;
 

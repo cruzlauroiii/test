@@ -5,7 +5,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Services;
 
-public class IPadUserOptionService : IIPadUserOptionService
+public class IPadUserOptionService
 {
     private readonly IIPadUserOptionRepository _iPadUserOptionRepository;
 

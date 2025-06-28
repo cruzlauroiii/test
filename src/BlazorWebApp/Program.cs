@@ -4,9 +4,7 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Domain.Interfaces;
-using Application.UseCases.Staff;
-using Application.UseCases.Auth;
-using Application.UseCases.Roles;
+using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -43,15 +41,14 @@ public class Program
         builder.Services.AddScoped<IAuthService, Infrastructure.Services.AuthService>();
         builder.Services.AddScoped<IRoleConfigurationService, Infrastructure.Services.RoleConfigurationService>();
         builder.Services.AddScoped<ISessionService, Infrastructure.Services.SessionService>();
-        builder.Services.AddScoped<StaffService>();
-        builder.Services.AddScoped<Application.UseCases.Auth.AuthService>();
-        builder.Services.AddScoped<Application.UseCases.Roles.RoleService>();
-        builder.Services.AddScoped<Application.UseCases.Memberships.MembershipService>();
-        builder.Services.AddScoped<Application.UseCases.MembershipTypes.MembershipTypeService>();
-        builder.Services.AddScoped<Application.UseCases.Contacts.ContactService>();
-        builder.Services.AddScoped<Application.UseCases.AssociatedCompanies.AssociatedCompanyService>();
-        builder.Services.AddScoped<Application.UseCases.IPadUserOptions.IPadUserOptionService>();
-        builder.Services.AddScoped<Application.UseCases.DeliveryPreStarts.DeliveryPreStartService>();
+        builder.Services.AddScoped<Infrastructure.Services.StaffService>();
+        builder.Services.AddScoped<Infrastructure.Services.RoleService>();
+        builder.Services.AddScoped<Infrastructure.Services.MembershipService>();
+        builder.Services.AddScoped<Infrastructure.Services.MembershipTypeService>();
+        builder.Services.AddScoped<Infrastructure.Services.ContactService>();
+        builder.Services.AddScoped<Infrastructure.Services.AssociatedCompanyService>();
+        builder.Services.AddScoped<Infrastructure.Services.IPadUserOptionService>();
+        builder.Services.AddScoped<Infrastructure.Services.DeliveryPreStartService>();
 
         // Authentication
         var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-here-must-be-at-least-32-characters";

@@ -5,7 +5,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Services;
 
-public class MembershipService : IMembershipService
+public class MembershipService
 {
     private readonly IMembershipRepository _membershipRepository;
     private readonly IStaffRepository _staffRepository;

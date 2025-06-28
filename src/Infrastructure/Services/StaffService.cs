@@ -5,7 +5,7 @@ using Domain.Interfaces;
 
 namespace Infrastructure.Services;
 
-public class StaffService : IStaffService
+public class StaffService
 {
     private readonly IStaffRepository _staffRepository;
     private readonly IRoleRepository _roleRepository;
