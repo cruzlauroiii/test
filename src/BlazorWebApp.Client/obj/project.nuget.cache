@@ -1,15 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "5ZCExVNHbbG5qdGg2bcO1gog0jFoRZJEqAs4vxZCtc7x2XASBwdHx7dYK+1OigzNyXwRqQUJ4cl8QMXfIgZ6PA==",
+  "dgSpecHash": "BJQN/xIvqIqYa4W3AV810GYCzyONLGJUIiSLIb5v7rLTNuHLc16di1RQ6723jxGP+d9+Eec3ko9Rc4alus1fag==",
   "success": true,
   "projectFilePath": "/home/runner/work/test/test/src/BlazorWebApp.Client/BlazorWebApp.Client.csproj",
   "expectedPackageFiles": [
     "/home/runner/.nuget/packages/microsoft.aspnetcore.authorization/8.0.17/microsoft.aspnetcore.authorization.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components/8.0.17/microsoft.aspnetcore.components.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.analyzers/8.0.17/microsoft.aspnetcore.components.analyzers.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.components.authorization/8.0.17/microsoft.aspnetcore.components.authorization.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.forms/8.0.17/microsoft.aspnetcore.components.forms.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.web/8.0.17/microsoft.aspnetcore.components.web.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.webassembly/8.0.17/microsoft.aspnetcore.components.webassembly.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.components.webassembly.devserver/8.0.17/microsoft.aspnetcore.components.webassembly.devserver.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.metadata/8.0.17/microsoft.aspnetcore.metadata.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",
@@ -29,8 +31,23 @@
     "/home/runner/.nuget/packages/microsoft.jsinterop.webassembly/8.0.17/microsoft.jsinterop.webassembly.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.net.illink.tasks/8.0.17/microsoft.net.illink.tasks.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.net.sdk.webassembly.pack/8.0.17/microsoft.net.sdk.webassembly.pack.8.0.17.nupkg.sha512",
-    "/home/runner/.nuget/packages/system.io.pipelines/8.0.0/system.io.pipelines.8.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.io.pipelines/9.0.0/system.io.pipelines.9.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.net.http.json/9.0.0/system.net.http.json.9.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.text.encodings.web/9.0.0/system.text.encodings.web.9.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.text.json/9.0.0/system.text.json.9.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.netcore.app.runtime.mono.browser-wasm/8.0.17/microsoft.netcore.app.runtime.mono.browser-wasm.8.0.17.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "BlazorWebApp.Client depends on System.Net.Http.Json (>= 8.0.17) but System.Net.Http.Json 8.0.17 was not found. An approximate best match of System.Net.Http.Json 9.0.0 was resolved.",
+      "libraryId": "System.Net.Http.Json",
+      "targetGraphs": [
+        "net8.0",
+        "net8.0/browser-wasm"
+      ]
+    }
+  ]
 }

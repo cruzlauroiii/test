@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/_framework/blazor.webassembly.js.gz"
     },
     {
+      "Id": "/home/runner/work/test/test/src/BlazorWebApp.Client/obj/Debug/net8.0/scopedcss/projectbundle/BlazorWebApp.Client.bundle.scp.css",
+      "PackagePath": "staticwebassets/BlazorWebApp.Client.bundle.scp.css"
+    },
+    {
       "Id": "/home/runner/work/test/test/src/BlazorWebApp.Client/wwwroot/appsettings.Development.json",
       "PackagePath": "staticwebassets/appsettings.Development.json"
     },
