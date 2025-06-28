@@ -38,6 +38,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/runner/work/test/test/src/BlazorWebApp.Client/Components/Pages/Memberships/CreateMembership.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NZW1iZXJzaGlwcy9DcmVhdGVNZW1iZXJzaGlwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/test/test/src/BlazorWebApp.Client/Components/Pages/Memberships/MembershipList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NZW1iZXJzaGlwcy9NZW1iZXJzaGlwTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/runner/work/test/test/src/BlazorWebApp.Client/Components/Pages/Operations/Broker.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcGVyYXRpb25zL0Jyb2tlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

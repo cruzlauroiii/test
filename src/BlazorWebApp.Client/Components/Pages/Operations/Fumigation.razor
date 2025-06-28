@@ -1,9 +1,10 @@
 @page "/fumigation"
 @using Application.DTOs
 @using Application.UseCases.Roles
-@using Application.UseCases.Staff
+@using Domain.Interfaces
 @inject RoleService RoleService
-@inject StaffService StaffService
+@inject IRoleConfigurationService RoleConfigurationService
+@inject ISessionService SessionService
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 @attribute [Authorize(Policy = "FumigationRole")]
@@ -132,9 +133,15 @@
     {
         try
         {
-            // This would need to be implemented in StaffService to clear all roles except Fumigation
+            // Clear all current session roles and set only Fumigation role
+            SessionService.ClearSessionRoles();
+            await SessionService.SetCurrentRoleOnlyAsync("Fumigation");
+            
             message = "Switched to Fumigation role only. All other roles have been removed for this session.";
             errorMessage = string.Empty;
+            
+            // Reload properties to reflect the session change
+            await LoadFumigationProperties();
         }
         catch (Exception ex)
         {

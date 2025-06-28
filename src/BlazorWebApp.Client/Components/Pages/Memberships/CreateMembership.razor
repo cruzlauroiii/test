@@ -1,0 +1,214 @@
+@page "/memberships/create"
+@using Application.DTOs
+@using Application.UseCases.Memberships
+@using Application.UseCases.Staff
+@using Application.UseCases.Contacts
+@inject MembershipService MembershipService
+@inject StaffService StaffService
+@inject ContactService ContactService
+@inject NavigationManager Navigation
+@attribute [Authorize]
+
+<PageTitle>Create Membership</PageTitle>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Create New Membership</h4>
+                </div>
+                <div class="card-body">
+                    <EditForm Model="createMembershipDto" OnValidSubmit="HandleSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary class="text-danger" />
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="membershipNo" class="form-label">Membership No *</label>
+                                    <InputText id="membershipNo" class="form-control" @bind-Value="createMembershipDto.MembershipNo" />
+                                    <ValidationMessage For="@(() => createMembershipDto.MembershipNo)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="memberPassword" class="form-label">Member Password *</label>
+                                    <InputText id="memberPassword" type="password" class="form-control" @bind-Value="createMembershipDto.MemberPassword" />
+                                    <ValidationMessage For="@(() => createMembershipDto.MemberPassword)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="memberId" class="form-label">Member ID (Contact) *</label>
+                                    <InputSelect id="memberId" class="form-select" @bind-Value="createMembershipDto.MemberId">
+                                        <option value="0">Select Contact...</option>
+                                        @foreach (var contact in availableContacts)
+                                        {
+                                            <option value="@contact.Id">@contact.Id - @contact.Company</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => createMembershipDto.MemberId)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="membershipType" class="form-label">Membership Type *</label>
+                                    <InputText id="membershipType" class="form-control" @bind-Value="createMembershipDto.MembershipType" />
+                                    <ValidationMessage For="@(() => createMembershipDto.MembershipType)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="remoteStaffId" class="form-label">Remote Staff ID *</label>
+                                    <InputSelect id="remoteStaffId" class="form-select" @bind-Value="createMembershipDto.RemoteStaffId">
+                                        <option value="0">Select Staff...</option>
+                                        @foreach (var staff in availableStaff)
+                                        {
+                                            <option value="@staff.StaffId">@staff.StaffId - @staff.Username (@staff.FirstName @staff.LastName)</option>
+                                        }
+                                    </InputSelect>
+                                    <ValidationMessage For="@(() => createMembershipDto.RemoteStaffId)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="company" class="form-label">Company</label>
+                                    <InputText id="company" class="form-control" @bind-Value="createMembershipDto.Company" />
+                                    <ValidationMessage For="@(() => createMembershipDto.Company)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="primaryCompany" class="form-label">Primary Company</label>
+                                    <InputText id="primaryCompany" class="form-control" @bind-Value="createMembershipDto.PrimaryCompany" />
+                                    <ValidationMessage For="@(() => createMembershipDto.PrimaryCompany)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="companyGroup" class="form-label">Company Group</label>
+                                    <InputText id="companyGroup" class="form-control" @bind-Value="createMembershipDto.CompanyGroup" />
+                                    <ValidationMessage For="@(() => createMembershipDto.CompanyGroup)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="mainLogoLocation" class="form-label">Main Logo Location</label>
+                                    <InputText id="mainLogoLocation" class="form-control" @bind-Value="createMembershipDto.MainLogoLocation" />
+                                    <ValidationMessage For="@(() => createMembershipDto.MainLogoLocation)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="reportLogoLocation" class="form-label">Report Logo Location</label>
+                                    <InputText id="reportLogoLocation" class="form-control" @bind-Value="createMembershipDto.ReportLogoLocation" />
+                                    <ValidationMessage For="@(() => createMembershipDto.ReportLogoLocation)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <div class="alert alert-danger">
+                                @errorMessage
+                            </div>
+                        }
+
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+                            <button type="submit" class="btn btn-primary" disabled="@isLoading">
+                                @if (isLoading)
+                                {
+                                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                                    <span>Creating...</span>
+                                }
+                                else
+                                {
+                                    <span>Create Membership</span>
+                                }
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateMembershipDto createMembershipDto = new();
+    private List<StaffDto> availableStaff = new();
+    private List<ContactDto> availableContacts = new();
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStaff();
+        await LoadContacts();
+    }
+
+    private async Task LoadStaff()
+    {
+        try
+        {
+            var staff = await StaffService.GetAllStaffAsync();
+            availableStaff = staff.ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Failed to load staff.";
+        }
+    }
+
+    private async Task LoadContacts()
+    {
+        try
+        {
+            var contacts = await ContactService.GetAllContactsAsync();
+            availableContacts = contacts.ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Failed to load contacts.";
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            await MembershipService.CreateMembershipAsync(createMembershipDto);
+            Navigation.NavigateTo("/memberships");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Failed to create membership. Please try again.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/memberships");
+    }
+}

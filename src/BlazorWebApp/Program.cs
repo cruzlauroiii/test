@@ -41,9 +41,17 @@ public class Program
 
         // Services
         builder.Services.AddScoped<IAuthService, Infrastructure.Services.AuthService>();
+        builder.Services.AddScoped<IRoleConfigurationService, Infrastructure.Services.RoleConfigurationService>();
+        builder.Services.AddScoped<ISessionService, Infrastructure.Services.SessionService>();
         builder.Services.AddScoped<StaffService>();
         builder.Services.AddScoped<Application.UseCases.Auth.AuthService>();
         builder.Services.AddScoped<Application.UseCases.Roles.RoleService>();
+        builder.Services.AddScoped<Application.UseCases.Memberships.MembershipService>();
+        builder.Services.AddScoped<Application.UseCases.MembershipTypes.MembershipTypeService>();
+        builder.Services.AddScoped<Application.UseCases.Contacts.ContactService>();
+        builder.Services.AddScoped<Application.UseCases.AssociatedCompanies.AssociatedCompanyService>();
+        builder.Services.AddScoped<Application.UseCases.IPadUserOptions.IPadUserOptionService>();
+        builder.Services.AddScoped<Application.UseCases.DeliveryPreStarts.DeliveryPreStartService>();
 
         // Authentication
         var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-here-must-be-at-least-32-characters";
