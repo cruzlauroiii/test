@@ -1,9 +1,10 @@
 using Application.DTOs;
+using Application.Interfaces;
 using Domain.Interfaces;
 
 namespace Application.UseCases.Auth;
 
-public class AuthService
+public class AuthService : IAuthApplicationService
 {
     private readonly IStaffRepository _staffRepository;
     private readonly IAuthService _authService;

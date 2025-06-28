@@ -1,10 +1,11 @@
 using Application.DTOs;
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.Staff;
 
-public class StaffService
+public class StaffService : IStaffService
 {
     private readonly IStaffRepository _staffRepository;
     private readonly IRoleRepository _roleRepository;

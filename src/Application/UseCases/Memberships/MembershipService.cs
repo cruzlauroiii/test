@@ -1,10 +1,11 @@
 using Application.DTOs;
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.Memberships;
 
-public class MembershipService
+public class MembershipService : IMembershipService
 {
     private readonly IMembershipRepository _membershipRepository;
     private readonly IStaffRepository _staffRepository;

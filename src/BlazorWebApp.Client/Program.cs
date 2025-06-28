@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
+using Application.Interfaces;
 using Application.UseCases.Staff;
 using Application.UseCases.Auth;
 using Application.UseCases.Roles;
@@ -29,15 +30,15 @@ public class Program
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
         // Add application services  
-        builder.Services.AddScoped<StaffService>();
-        builder.Services.AddScoped<Application.UseCases.Auth.AuthService>();
-        builder.Services.AddScoped<RoleService>();
-        builder.Services.AddScoped<MembershipService>();
-        builder.Services.AddScoped<MembershipTypeService>();
-        builder.Services.AddScoped<ContactService>();
-        builder.Services.AddScoped<AssociatedCompanyService>();
-        builder.Services.AddScoped<IPadUserOptionService>();
-        builder.Services.AddScoped<DeliveryPreStartService>();
+        builder.Services.AddScoped<IStaffService, StaffService>();
+        builder.Services.AddScoped<IAuthApplicationService, Application.UseCases.Auth.AuthService>();
+        builder.Services.AddScoped<IRoleService, RoleService>();
+        builder.Services.AddScoped<IMembershipService, MembershipService>();
+        builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
+        builder.Services.AddScoped<IContactService, ContactService>();
+        builder.Services.AddScoped<IAssociatedCompanyService, AssociatedCompanyService>();
+        builder.Services.AddScoped<IIPadUserOptionService, IPadUserOptionService>();
+        builder.Services.AddScoped<IDeliveryPreStartService, DeliveryPreStartService>();
 
         await builder.Build().RunAsync();
     }

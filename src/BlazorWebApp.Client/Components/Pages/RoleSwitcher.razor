@@ -1,0 +1,177 @@
+@page "/role-switcher"
+@using Application.UseCases.Roles
+@using Application.DTOs
+@using Microsoft.AspNetCore.Components.Authorization
+@inject RoleService RoleService
+@inject AuthenticationStateProvider AuthStateProvider
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@attribute [Authorize]
+
+<PageTitle>Role Switcher</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Role Switcher</h2>
+                <span class="badge bg-info">Current User: @currentUser</span>
+            </div>
+
+            <div class="row">
+                @if (availableRoles != null)
+                {
+                    @foreach (var role in availableRoles)
+                    {
+                        <div class="col-md-4 col-lg-3 mb-3">
+                            <div class="card h-100 role-card @(currentRole == role.Name ? "border-primary" : "")" style="cursor: pointer;">
+                                <div class="card-body text-center" @onclick="() => SwitchToRole(role.Name)">
+                                    <div class="role-icon mb-3">
+                                        @GetRoleIcon(role.Name)
+                                    </div>
+                                    <h5 class="card-title">@role.Name</h5>
+                                    <p class="card-text text-muted">@role.Description</p>
+                                    @if (currentRole == role.Name)
+                                    {
+                                        <div class="text-primary">
+                                            <i class="fas fa-check-circle"></i> Current Role
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-outline-primary btn-sm">Switch to @role.Name</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Loading available roles...</p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Role Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="btn-group" role="group">
+                                <a href="/operations/broker" class="btn btn-outline-primary">
+                                    <i class="fas fa-handshake"></i> Broker Operations
+                                </a>
+                                <a href="/operations/driver" class="btn btn-outline-success">
+                                    <i class="fas fa-truck"></i> Driver Operations
+                                </a>
+                                <a href="/operations/forklift" class="btn btn-outline-warning">
+                                    <i class="fas fa-warehouse"></i> Forklift Operations
+                                </a>
+                                <a href="/operations/fumigation" class="btn btn-outline-danger">
+                                    <i class="fas fa-spray-can"></i> Fumigation Operations
+                                </a>
+                                <a href="/operations/itv" class="btn btn-outline-info">
+                                    <i class="fas fa-clipboard-check"></i> ITV Operations
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private IEnumerable<RoleDto>? availableRoles;
+    private string currentUser = "";
+    private string currentRole = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            availableRoles = await RoleService.GetAllRolesAsync();
+
+            var authState = await AuthStateProvider.GetAuthenticationStateAsync();
+            if (authState.User.Identity?.IsAuthenticated == true)
+            {
+                currentUser = authState.User.Identity.Name ?? "Unknown";
+                // Get current role from claims or session
+                var roleClaim = authState.User.FindFirst("role");
+                currentRole = roleClaim?.Value ?? "";
+            }
+        }
+        catch (Exception ex)
+        {
+            await JSRuntime.InvokeVoidAsync("console.error", $"Error loading roles: {ex.Message}");
+        }
+    }
+
+    private async Task SwitchToRole(string roleName)
+    {
+        try
+        {
+            // In a real implementation, this would update the user's session or context
+            // For now, we'll just navigate to the role-specific operations page
+            currentRole = roleName;
+            
+            var operationPage = roleName.ToLower() switch
+            {
+                "broker" => "/operations/broker",
+                "driver" => "/operations/driver", 
+                "forklift" => "/operations/forklift",
+                "fumigation" => "/operations/fumigation",
+                "itv" => "/operations/itv",
+                _ => "/operations/broker"
+            };
+
+            await JSRuntime.InvokeVoidAsync("alert", $"Switched to {roleName} role!");
+            Navigation.NavigateTo(operationPage);
+        }
+        catch (Exception ex)
+        {
+            await JSRuntime.InvokeVoidAsync("console.error", $"Error switching role: {ex.Message}");
+        }
+    }
+
+    private string GetRoleIcon(string roleName)
+    {
+        return roleName.ToLower() switch
+        {
+            "broker" => "<i class=\"fas fa-handshake fa-3x text-primary\"></i>",
+            "driver" => "<i class=\"fas fa-truck fa-3x text-success\"></i>",
+            "forklift" => "<i class=\"fas fa-warehouse fa-3x text-warning\"></i>",
+            "fumigation" => "<i class=\"fas fa-spray-can fa-3x text-danger\"></i>",
+            "itv" => "<i class=\"fas fa-clipboard-check fa-3x text-info\"></i>",
+            _ => "<i class=\"fas fa-user fa-3x text-secondary\"></i>"
+        };
+    }
+}
+
+<style>
+    .role-card {
+        transition: all 0.3s ease;
+    }
+
+    .role-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .role-icon {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>

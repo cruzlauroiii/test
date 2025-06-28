@@ -1,9 +1,10 @@
+using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Application.UseCases.DeliveryPreStarts;
 
-public class DeliveryPreStartService
+public class DeliveryPreStartService : IDeliveryPreStartService
 {
     private readonly IDeliveryPreStartRepository _deliveryPreStartRepository;
 
