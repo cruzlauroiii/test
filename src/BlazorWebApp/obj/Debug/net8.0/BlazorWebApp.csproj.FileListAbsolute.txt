@@ -175,3 +175,9 @@
 /home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/Application.pdb
 /home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/SharedUI.pdb
 /home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/Domain.pdb
+/home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/Microsoft.AspNetCore.Components.Authorization.dll
+/home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/System.IO.Pipelines.dll
+/home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/System.Net.Http.Json.dll
+/home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/System.Text.Encodings.Web.dll
+/home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/System.Text.Json.dll
+/home/runner/work/test/test/src/BlazorWebApp/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
