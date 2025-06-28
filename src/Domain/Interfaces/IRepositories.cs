@@ -95,6 +95,42 @@ public interface IDeliveryPreStartRepository
     Task<bool> DeleteAsync(int id);
 }
 
+public interface ISessionService
+{
+    Task SetCurrentRoleOnlyAsync(string roleName);
+    string? GetCurrentSessionRole();
+    Task<bool> HasSessionRoleAsync(string roleName);
+    void ClearSessionRoles();
+    T? GetSessionData<T>(string key);
+    void SetSessionData<T>(string key, T value);
+}
+
+public interface IRoleConfigurationService
+{
+    Dictionary<string, string> GetRoleProperties(string roleName);
+    Dictionary<string, string> GetBrokerProperties(
+        string membershipNo = "",
+        string memberPassword = "",
+        int memberId = 0,
+        string membershipType = "",
+        int staffId = 0,
+        string fullName = "",
+        string primaryCompany = "",
+        string companyGroup = "",
+        string companyLogo = "",
+        string companyReportLogo = "");
+    Dictionary<string, string> GetDriverProperties(
+        bool showCompletedJobs = false,
+        string workCompany = "",
+        string truckId = "",
+        string trailerId = "",
+        string trailerId2 = "",
+        string trailerId3 = "");
+    Dictionary<string, string> GetFumigationProperties();
+    Dictionary<string, string> GetForkliftProperties();
+    Dictionary<string, string> GetITVProperties();
+}
+
 public interface IAuthService
 {
     Task<bool> AuthenticateAsync(string username, string password);

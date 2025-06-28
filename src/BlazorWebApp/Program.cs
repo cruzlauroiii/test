@@ -41,6 +41,8 @@ public class Program
 
         // Services
         builder.Services.AddScoped<IAuthService, Infrastructure.Services.AuthService>();
+        builder.Services.AddScoped<IRoleConfigurationService, Infrastructure.Services.RoleConfigurationService>();
+        builder.Services.AddScoped<ISessionService, Infrastructure.Services.SessionService>();
         builder.Services.AddScoped<StaffService>();
         builder.Services.AddScoped<Application.UseCases.Auth.AuthService>();
         builder.Services.AddScoped<Application.UseCases.Roles.RoleService>();

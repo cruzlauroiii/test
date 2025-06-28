@@ -1569,8 +1569,10 @@
           "Application": "1.0.0",
           "BCrypt.Net-Next": "4.0.3",
           "Domain": "1.0.0",
+          "Microsoft.AspNetCore.Components.Authorization": "8.0.17",
           "Microsoft.EntityFrameworkCore.Design": "8.0.0",
           "Microsoft.EntityFrameworkCore.Sqlite": "8.0.0",
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.IdentityModel.Tokens": "8.0.0",
           "System.IdentityModel.Tokens.Jwt": "8.0.0"
         },
