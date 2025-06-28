@@ -1,8 +1,8 @@
 @page "/role-switcher"
-@using Application.UseCases.Roles
-@using Application.DTOs
+@using Application.Interfaces
+@using Domain.DTOs
 @using Microsoft.AspNetCore.Components.Authorization
-@inject RoleService RoleService
+@inject IRoleService RoleService
 @inject AuthenticationStateProvider AuthStateProvider
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime

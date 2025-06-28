@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 using Domain.Interfaces;
-using Application.UseCases.Staff;
+using Application.Interfaces;
 
 namespace Infrastructure.Services;
 
 public class SessionService : ISessionService
 {
     private readonly AuthenticationStateProvider _authenticationStateProvider;
-    private readonly StaffService _staffService;
+    private readonly IStaffService _staffService;
     private readonly Dictionary<string, object> _sessionData = new();
 
-    public SessionService(AuthenticationStateProvider authenticationStateProvider, StaffService staffService)
+    public SessionService(AuthenticationStateProvider authenticationStateProvider, IStaffService staffService)
     {
         _authenticationStateProvider = authenticationStateProvider;
         _staffService = staffService;

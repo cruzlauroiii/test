@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
 using Application.Interfaces;
-using Application.UseCases.Staff;
-using Application.UseCases.Auth;
-using Application.UseCases.Roles;
-using Application.UseCases.Memberships;
-using Application.UseCases.MembershipTypes;
-using Application.UseCases.Contacts;
-using Application.UseCases.AssociatedCompanies;
-using Application.UseCases.IPadUserOptions;
-using Application.UseCases.DeliveryPreStarts;
+using Infrastructure.Services.UseCases.Staff;
+using Infrastructure.Services.UseCases.Auth;
+using Infrastructure.Services.UseCases.Roles;
+using Infrastructure.Services.UseCases.Memberships;
+using Infrastructure.Services.UseCases.MembershipTypes;
+using Infrastructure.Services.UseCases.Contacts;
+using Infrastructure.Services.UseCases.AssociatedCompanies;
+using Infrastructure.Services.UseCases.IPadUserOptions;
+using Infrastructure.Services.UseCases.DeliveryPreStarts;
 
 namespace BlazorWebApp.Client;
 
@@ -30,15 +30,15 @@ public class Program
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
         // Add application services  
-        builder.Services.AddScoped<IStaffService, StaffService>();
-        builder.Services.AddScoped<IAuthApplicationService, Application.UseCases.Auth.AuthService>();
-        builder.Services.AddScoped<IRoleService, RoleService>();
-        builder.Services.AddScoped<IMembershipService, MembershipService>();
-        builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
-        builder.Services.AddScoped<IContactService, ContactService>();
-        builder.Services.AddScoped<IAssociatedCompanyService, AssociatedCompanyService>();
-        builder.Services.AddScoped<IIPadUserOptionService, IPadUserOptionService>();
-        builder.Services.AddScoped<IDeliveryPreStartService, DeliveryPreStartService>();
+        builder.Services.AddScoped<IStaffService, Infrastructure.Services.UseCases.Staff.StaffService>();
+        builder.Services.AddScoped<IAuthApplicationService, Infrastructure.Services.UseCases.Auth.AuthService>();
+        builder.Services.AddScoped<IRoleService, Infrastructure.Services.UseCases.Roles.RoleService>();
+        builder.Services.AddScoped<IMembershipService, Infrastructure.Services.UseCases.Memberships.MembershipService>();
+        builder.Services.AddScoped<IMembershipTypeService, Infrastructure.Services.UseCases.MembershipTypes.MembershipTypeService>();
+        builder.Services.AddScoped<IContactService, Infrastructure.Services.UseCases.Contacts.ContactService>();
+        builder.Services.AddScoped<IAssociatedCompanyService, Infrastructure.Services.UseCases.AssociatedCompanies.AssociatedCompanyService>();
+        builder.Services.AddScoped<IIPadUserOptionService, Infrastructure.Services.UseCases.IPadUserOptions.IPadUserOptionService>();
+        builder.Services.AddScoped<IDeliveryPreStartService, Infrastructure.Services.UseCases.DeliveryPreStarts.DeliveryPreStartService>();
 
         await builder.Build().RunAsync();
     }

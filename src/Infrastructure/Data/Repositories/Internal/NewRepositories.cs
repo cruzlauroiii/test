@@ -3,7 +3,7 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
 
-namespace Infrastructure.Repositories;
+namespace Infrastructure.Data.Repositories.Internal;
 
 public class MembershipRepository : IMembershipRepository
 {

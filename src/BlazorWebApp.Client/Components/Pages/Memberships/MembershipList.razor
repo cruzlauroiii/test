@@ -1,8 +1,8 @@
 @page "/memberships"
-@using Application.DTOs
-@using Application.UseCases.Memberships
+@using Domain.DTOs
+@using Application.Interfaces
 @using Domain.Entities
-@inject MembershipService MembershipService
+@inject IMembershipService MembershipService
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 @attribute [Authorize]

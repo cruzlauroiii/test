@@ -1,9 +1,9 @@
 @page "/forklift"
-@using Application.DTOs
-@using Application.UseCases.Roles
-@using Application.UseCases.Staff
-@inject RoleService RoleService
-@inject StaffService StaffService
+@using Domain.DTOs
+@using Application.Interfaces
+@using Application.Interfaces
+@inject IRoleService RoleService
+@inject IStaffService StaffService
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 @attribute [Authorize(Policy = "ForkliftRole")]
