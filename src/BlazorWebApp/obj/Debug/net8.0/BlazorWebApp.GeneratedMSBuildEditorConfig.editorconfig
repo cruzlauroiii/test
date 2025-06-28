@@ -54,6 +54,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcGVyYXRpb25zL0lUVi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Roles/CreateRole.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Sb2xlcy9DcmVhdGVSb2xlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Roles/EditRole.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Sb2xlcy9FZGl0Um9sZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Roles/RoleList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Sb2xlcy9Sb2xlTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Staff/ChangePassword.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TdGFmZi9DaGFuZ2VQYXNzd29yZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

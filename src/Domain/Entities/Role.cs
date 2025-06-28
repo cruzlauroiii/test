@@ -7,6 +7,7 @@ public class Role
     public string Description { get; set; } = string.Empty;
     
     public ICollection<StaffRole> StaffRoles { get; set; } = new List<StaffRole>();
+    public ICollection<RoleProperty> Properties { get; set; } = new List<RoleProperty>();
 }
 
 public enum RoleType

@@ -82,7 +82,17 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/runner/work/test/test/src/Application/Application.csproj": {
+                "projectPath": "/home/runner/work/test/test/src/Application/Application.csproj"
+              },
+              "/home/runner/work/test/test/src/Domain/Domain.csproj": {
+                "projectPath": "/home/runner/work/test/test/src/Domain/Domain.csproj"
+              },
+              "/home/runner/work/test/test/src/SharedUI/SharedUI.csproj": {
+                "projectPath": "/home/runner/work/test/test/src/SharedUI/SharedUI.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -95,7 +105,16 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Components.Authorization": {
+              "target": "Package",
+              "version": "[8.0.17, )"
+            },
             "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[8.0.17, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.17, )"
             },
@@ -110,6 +129,10 @@
               "target": "Package",
               "version": "[8.0.17, )",
               "autoReferenced": true
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[8.0.17, )"
             }
           },
           "imports": [

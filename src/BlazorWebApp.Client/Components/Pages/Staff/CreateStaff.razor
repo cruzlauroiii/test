@@ -1,0 +1,167 @@
+@page "/staff/create"
+@using Application.DTOs
+@using Application.UseCases.Staff
+@using Domain.Interfaces
+@inject StaffService StaffService
+@inject IRoleRepository RoleRepository
+@inject NavigationManager Navigation
+@attribute [Authorize]
+
+<PageTitle>Create Staff</PageTitle>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Create New Staff Member</h3>
+                </div>
+                <div class="card-body">
+                    <EditForm Model="createStaffDto" OnValidSubmit="HandleSubmit" FormName="CreateStaffForm">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+
+                        @if (!string.IsNullOrEmpty(errorMessage))
+                        {
+                            <div class="alert alert-danger">@errorMessage</div>
+                        }
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <InputText id="username" class="form-control" @bind-Value="createStaffDto.Username" />
+                                    <ValidationMessage For="@(() => createStaffDto.Username)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <InputText id="password" type="password" class="form-control" @bind-Value="createStaffDto.Password" />
+                                    <ValidationMessage For="@(() => createStaffDto.Password)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <InputText id="firstName" class="form-control" @bind-Value="createStaffDto.FirstName" />
+                                    <ValidationMessage For="@(() => createStaffDto.FirstName)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <InputText id="lastName" class="form-control" @bind-Value="createStaffDto.LastName" />
+                                    <ValidationMessage For="@(() => createStaffDto.LastName)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <InputText id="email" type="email" class="form-control" @bind-Value="createStaffDto.Email" />
+                            <ValidationMessage For="@(() => createStaffDto.Email)" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Roles</label>
+                            <div class="row">
+                                @foreach (var role in availableRoles)
+                                {
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   id="role_@role.Id" 
+                                                   checked="@createStaffDto.RoleIds.Contains(role.Id)"
+                                                   @onchange="@(e => ToggleRole(role.Id, (bool)e.Value!))" />
+                                            <label class="form-check-label" for="role_@role.Id">
+                                                @role.Name - @role.Description
+                                            </label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+                            <button type="submit" class="btn btn-primary" disabled="@isLoading">
+                                @if (isLoading)
+                                {
+                                    <span class="spinner-border spinner-border-sm me-2"></span>
+                                }
+                                Create Staff
+                            </button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private CreateStaffDto createStaffDto = new();
+    private List<Domain.Entities.Role> availableRoles = new();
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRoles();
+    }
+
+    private async Task LoadRoles()
+    {
+        try
+        {
+            var roles = await RoleRepository.GetAllAsync();
+            availableRoles = roles.ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Failed to load roles.";
+        }
+    }
+
+    private void ToggleRole(int roleId, bool isChecked)
+    {
+        if (isChecked)
+        {
+            if (!createStaffDto.RoleIds.Contains(roleId))
+                createStaffDto.RoleIds.Add(roleId);
+        }
+        else
+        {
+            createStaffDto.RoleIds.Remove(roleId);
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            await StaffService.CreateStaffAsync(createStaffDto);
+            Navigation.NavigateTo("/staff");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/staff");
+    }
+}

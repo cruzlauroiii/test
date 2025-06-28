@@ -80,12 +80,21 @@ public class RoleRepository : IRoleRepository
 
     public async Task<IEnumerable<Role>> GetAllAsync()
     {
-        return await _context.Roles.ToListAsync();
+        return await _context.Roles
+            .Include(r => r.Properties)
+            .ToListAsync();
     }
 
     public async Task<Role?> GetByIdAsync(int id)
     {
         return await _context.Roles.FindAsync(id);
+    }
+
+    public async Task<Role?> GetByIdWithPropertiesAsync(int id)
+    {
+        return await _context.Roles
+            .Include(r => r.Properties)
+            .FirstOrDefaultAsync(r => r.Id == id);
     }
 
     public async Task<Role> CreateAsync(Role role)
@@ -109,6 +118,71 @@ public class RoleRepository : IRoleRepository
             return false;
 
         _context.Roles.Remove(role);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+}
+
+public class RolePropertyRepository : IRolePropertyRepository
+{
+    private readonly ApplicationDbContext _context;
+
+    public RolePropertyRepository(ApplicationDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IEnumerable<RoleProperty>> GetByRoleIdAsync(int roleId)
+    {
+        return await _context.RoleProperties
+            .Where(rp => rp.RoleId == roleId)
+            .ToListAsync();
+    }
+
+    public async Task<RoleProperty?> GetByIdAsync(int id)
+    {
+        return await _context.RoleProperties.FindAsync(id);
+    }
+
+    public async Task<RoleProperty?> GetByRoleIdAndKeyAsync(int roleId, string key)
+    {
+        return await _context.RoleProperties
+            .FirstOrDefaultAsync(rp => rp.RoleId == roleId && rp.Key == key);
+    }
+
+    public async Task<RoleProperty> CreateAsync(RoleProperty roleProperty)
+    {
+        _context.RoleProperties.Add(roleProperty);
+        await _context.SaveChangesAsync();
+        return roleProperty;
+    }
+
+    public async Task<RoleProperty> UpdateAsync(RoleProperty roleProperty)
+    {
+        roleProperty.UpdatedAt = DateTime.UtcNow;
+        _context.RoleProperties.Update(roleProperty);
+        await _context.SaveChangesAsync();
+        return roleProperty;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var property = await _context.RoleProperties.FindAsync(id);
+        if (property == null)
+            return false;
+
+        _context.RoleProperties.Remove(property);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> DeleteByRoleIdAndKeyAsync(int roleId, string key)
+    {
+        var property = await GetByRoleIdAndKeyAsync(roleId, key);
+        if (property == null)
+            return false;
+
+        _context.RoleProperties.Remove(property);
         await _context.SaveChangesAsync();
         return true;
     }

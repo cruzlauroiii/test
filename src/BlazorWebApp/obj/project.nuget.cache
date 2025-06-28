@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bQYR8pYrcnyRY1lnQi6BoG8MVCzErsTyrM0Jmnt8ArsKwptX/Jk/31BnB7BKo9UINg54Pe7H3EJF8st5gT2aqA==",
+  "dgSpecHash": "S37eH24RXxMbNWAfFoYwhRP3NNBoxTUg3y2zLD4ypV6taMcjKN3jSZbRE4+d8zekObz48KIIcbsFtSBRRiB17A==",
   "success": true,
   "projectFilePath": "/home/runner/work/test/test/src/BlazorWebApp/BlazorWebApp.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "/home/runner/.nuget/packages/microsoft.aspnetcore.authorization/8.0.17/microsoft.aspnetcore.authorization.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components/8.0.17/microsoft.aspnetcore.components.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.analyzers/8.0.17/microsoft.aspnetcore.components.analyzers.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.components.authorization/8.0.17/microsoft.aspnetcore.components.authorization.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.forms/8.0.17/microsoft.aspnetcore.components.forms.8.0.17.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.quickgrid/8.0.0/microsoft.aspnetcore.components.quickgrid.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.components.web/8.0.17/microsoft.aspnetcore.components.web.8.0.17.nupkg.sha512",
@@ -69,14 +70,26 @@
     "/home/runner/.nuget/packages/system.composition.runtime/6.0.0/system.composition.runtime.6.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.composition.typedparts/6.0.0/system.composition.typedparts.6.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.identitymodel.tokens.jwt/8.0.0/system.identitymodel.tokens.jwt.8.0.0.nupkg.sha512",
-    "/home/runner/.nuget/packages/system.io.pipelines/8.0.0/system.io.pipelines.8.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.io.pipelines/9.0.0/system.io.pipelines.9.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.net.http.json/9.0.0/system.net.http.json.9.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.reflection.metadata/6.0.1/system.reflection.metadata.6.0.1.nupkg.sha512",
     "/home/runner/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.text.encoding.codepages/6.0.0/system.text.encoding.codepages.6.0.0.nupkg.sha512",
-    "/home/runner/.nuget/packages/system.text.encodings.web/8.0.0/system.text.encodings.web.8.0.0.nupkg.sha512",
-    "/home/runner/.nuget/packages/system.text.json/8.0.0/system.text.json.8.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.text.encodings.web/9.0.0/system.text.encodings.web.9.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.text.json/9.0.0/system.text.json.9.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.threading.channels/6.0.0/system.threading.channels.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "BlazorWebApp.Client depends on System.Net.Http.Json (>= 8.0.17) but System.Net.Http.Json 8.0.17 was not found. An approximate best match of System.Net.Http.Json 9.0.0 was resolved.",
+      "libraryId": "System.Net.Http.Json",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }
