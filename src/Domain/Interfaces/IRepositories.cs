@@ -17,9 +17,21 @@ public interface IRoleRepository
 {
     Task<IEnumerable<Role>> GetAllAsync();
     Task<Role?> GetByIdAsync(int id);
+    Task<Role?> GetByIdWithPropertiesAsync(int id);
     Task<Role> CreateAsync(Role role);
     Task<Role> UpdateAsync(Role role);
     Task<bool> DeleteAsync(int id);
+}
+
+public interface IRolePropertyRepository
+{
+    Task<IEnumerable<RoleProperty>> GetByRoleIdAsync(int roleId);
+    Task<RoleProperty?> GetByIdAsync(int id);
+    Task<RoleProperty?> GetByRoleIdAndKeyAsync(int roleId, string key);
+    Task<RoleProperty> CreateAsync(RoleProperty roleProperty);
+    Task<RoleProperty> UpdateAsync(RoleProperty roleProperty);
+    Task<bool> DeleteAsync(int id);
+    Task<bool> DeleteByRoleIdAndKeyAsync(int roleId, string key);
 }
 
 public interface IAuthService

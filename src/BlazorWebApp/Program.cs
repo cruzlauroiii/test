@@ -6,6 +6,7 @@ using Infrastructure.Services;
 using Domain.Interfaces;
 using Application.UseCases.Staff;
 using Application.UseCases.Auth;
+using Application.UseCases.Roles;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -30,11 +31,13 @@ public class Program
         // Repositories
         builder.Services.AddScoped<IStaffRepository, StaffRepository>();
         builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+        builder.Services.AddScoped<IRolePropertyRepository, RolePropertyRepository>();
 
         // Services
         builder.Services.AddScoped<IAuthService, Infrastructure.Services.AuthService>();
         builder.Services.AddScoped<StaffService>();
         builder.Services.AddScoped<Application.UseCases.Auth.AuthService>();
+        builder.Services.AddScoped<Application.UseCases.Roles.RoleService>();
 
         // Authentication
         var jwtKey = builder.Configuration["Jwt:Key"] ?? "your-super-secret-key-here-must-be-at-least-32-characters";

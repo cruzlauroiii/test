@@ -12,6 +12,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Staff> Staff { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<StaffRole> StaffRoles { get; set; }
+    public DbSet<RoleProperty> RoleProperties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,6 +52,21 @@ public class ApplicationDbContext : DbContext
                 .WithMany(e => e.StaffRoles)
                 .HasForeignKey(e => e.RoleId)
                 .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // Configure RoleProperty entity
+        modelBuilder.Entity<RoleProperty>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Key).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Value).IsRequired().HasMaxLength(500);
+            
+            entity.HasOne(e => e.Role)
+                .WithMany(e => e.Properties)
+                .HasForeignKey(e => e.RoleId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            entity.HasIndex(e => new { e.RoleId, e.Key }).IsUnique();
         });
 
         // Seed default roles
