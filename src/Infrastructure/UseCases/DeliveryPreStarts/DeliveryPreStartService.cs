@@ -2,7 +2,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Application.UseCases.DeliveryPreStarts;
+namespace Infrastructure.UseCases.DeliveryPreStarts;
 
 public class DeliveryPreStartService : IDeliveryPreStartService
 {

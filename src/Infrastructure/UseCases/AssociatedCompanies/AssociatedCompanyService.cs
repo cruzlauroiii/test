@@ -2,7 +2,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Application.UseCases.AssociatedCompanies;
+namespace Infrastructure.UseCases.AssociatedCompanies;
 
 public class AssociatedCompanyService : IAssociatedCompanyService
 {

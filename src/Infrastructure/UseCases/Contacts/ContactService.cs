@@ -1,9 +1,9 @@
-using Application.DTOs;
+using Domain.DTOs;
 using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Application.UseCases.Contacts;
+namespace Infrastructure.UseCases.Contacts;
 
 public class ContactService : IContactService
 {

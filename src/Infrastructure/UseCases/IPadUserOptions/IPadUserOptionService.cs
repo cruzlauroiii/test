@@ -2,7 +2,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Application.UseCases.IPadUserOptions;
+namespace Infrastructure.UseCases.IPadUserOptions;
 
 public class IPadUserOptionService : IIPadUserOptionService
 {

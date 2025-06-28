@@ -1,8 +1,8 @@
-using Application.DTOs;
+using Domain.DTOs;
 using Application.Interfaces;
 using Domain.Interfaces;
 
-namespace Application.UseCases.Auth;
+namespace Infrastructure.UseCases.Auth;
 
 public class AuthService : IAuthApplicationService
 {

@@ -2,7 +2,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Application.UseCases.MembershipTypes;
+namespace Infrastructure.UseCases.MembershipTypes;
 
 public class MembershipTypeService : IMembershipTypeService
 {

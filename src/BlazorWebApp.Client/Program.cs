@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
 using Application.Interfaces;
-using Application.UseCases.Staff;
-using Application.UseCases.Auth;
-using Application.UseCases.Roles;
-using Application.UseCases.Memberships;
-using Application.UseCases.MembershipTypes;
-using Application.UseCases.Contacts;
-using Application.UseCases.AssociatedCompanies;
-using Application.UseCases.IPadUserOptions;
-using Application.UseCases.DeliveryPreStarts;
+using Infrastructure.UseCases.Staff;
+using Infrastructure.UseCases.Auth;
+using Infrastructure.UseCases.Roles;
+using Infrastructure.UseCases.Memberships;
+using Infrastructure.UseCases.MembershipTypes;
+using Infrastructure.UseCases.Contacts;
+using Infrastructure.UseCases.AssociatedCompanies;
+using Infrastructure.UseCases.IPadUserOptions;
+using Infrastructure.UseCases.DeliveryPreStarts;
 
 namespace BlazorWebApp.Client;
 
@@ -31,7 +31,7 @@ public class Program
 
         // Add application services  
         builder.Services.AddScoped<IStaffService, StaffService>();
-        builder.Services.AddScoped<IAuthApplicationService, Application.UseCases.Auth.AuthService>();
+        builder.Services.AddScoped<IAuthApplicationService, Infrastructure.UseCases.Auth.AuthService>();
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IMembershipService, MembershipService>();
         builder.Services.AddScoped<IMembershipTypeService, MembershipTypeService>();
