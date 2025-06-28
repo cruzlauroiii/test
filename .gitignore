@@ -25,6 +25,12 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+# Additional bin/obj cleanup
+**/bin/
+**/obj/
+**/*.dll
+**/*.pdb
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json
