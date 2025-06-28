@@ -32,6 +32,12 @@ public class Program
         builder.Services.AddScoped<IStaffRepository, StaffRepository>();
         builder.Services.AddScoped<IRoleRepository, RoleRepository>();
         builder.Services.AddScoped<IRolePropertyRepository, RolePropertyRepository>();
+        builder.Services.AddScoped<IMembershipRepository, MembershipRepository>();
+        builder.Services.AddScoped<IMembershipTypeRepository, MembershipTypeRepository>();
+        builder.Services.AddScoped<IContactRepository, ContactRepository>();
+        builder.Services.AddScoped<IAssociatedCompanyRepository, AssociatedCompanyRepository>();
+        builder.Services.AddScoped<IIPadUserOptionRepository, IPadUserOptionRepository>();
+        builder.Services.AddScoped<IDeliveryPreStartRepository, DeliveryPreStartRepository>();
 
         // Services
         builder.Services.AddScoped<IAuthService, Infrastructure.Services.AuthService>();

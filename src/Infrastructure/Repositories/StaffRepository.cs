@@ -38,6 +38,14 @@ public class StaffRepository : IStaffRepository
             .FirstOrDefaultAsync(s => s.Username == username);
     }
 
+    public async Task<Staff?> GetByStaffIdAsync(int staffId)
+    {
+        return await _context.Staff
+            .Include(s => s.StaffRoles)
+            .ThenInclude(sr => sr.Role)
+            .FirstOrDefaultAsync(s => s.StaffId == staffId);
+    }
+
     public async Task<Staff> CreateAsync(Staff staff)
     {
         _context.Staff.Add(staff);
@@ -66,6 +74,11 @@ public class StaffRepository : IStaffRepository
     public async Task<bool> ExistsAsync(string username)
     {
         return await _context.Staff.AnyAsync(s => s.Username == username);
+    }
+
+    public async Task<bool> ExistsByStaffIdAsync(int staffId)
+    {
+        return await _context.Staff.AnyAsync(s => s.StaffId == staffId);
     }
 }
 
