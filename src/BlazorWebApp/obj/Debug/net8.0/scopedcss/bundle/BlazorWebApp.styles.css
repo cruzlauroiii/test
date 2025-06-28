@@ -1,4 +1,5 @@
 @import '_content/Microsoft.AspNetCore.Components.QuickGrid/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css';
+@import 'BlazorWebApp.Client.bundle.scp.css';
 @import '_content/SharedUI/SharedUI.bundle.scp.css';
 
 /* _content/BlazorWebApp/Components/Layout/MainLayout.razor.rz.scp.css */

@@ -1,9 +1,8 @@
 @page "/staff/create"
 @using Application.DTOs
-@using Application.UseCases.Staff
-@using Domain.Interfaces
-@inject StaffService StaffService
-@inject IRoleRepository RoleRepository
+@using BlazorWebApp.Client.Services
+@inject ClientStaffService StaffService
+@inject ClientRoleService RoleService
 @inject NavigationManager Navigation
 @attribute [Authorize]
 
@@ -105,7 +104,7 @@
 
 @code {
     private CreateStaffDto createStaffDto = new();
-    private List<Domain.Entities.Role> availableRoles = new();
+    private List<RoleDto> availableRoles = new();
     private string errorMessage = string.Empty;
     private bool isLoading = false;
 
@@ -118,7 +117,7 @@
     {
         try
         {
-            var roles = await RoleRepository.GetAllAsync();
+            var roles = await RoleService.GetAllRolesAsync();
             availableRoles = roles.ToList();
         }
         catch (Exception ex)

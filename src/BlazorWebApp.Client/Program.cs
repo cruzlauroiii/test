@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
-using Application.UseCases.Staff;
-using Application.UseCases.Auth;
-using Application.UseCases.Roles;
+using BlazorWebApp.Client.Services;
 
 namespace BlazorWebApp.Client;
 
@@ -22,10 +20,10 @@ public class Program
         builder.Services.AddAuthorizationCore();
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
-        // Add application services  
-        builder.Services.AddScoped<StaffService>();
-        builder.Services.AddScoped<Application.UseCases.Auth.AuthService>();
-        builder.Services.AddScoped<RoleService>();
+        // Add client services  
+        builder.Services.AddScoped<ClientStaffService>();
+        builder.Services.AddScoped<ClientAuthService>();
+        builder.Services.AddScoped<ClientRoleService>();
 
         await builder.Build().RunAsync();
     }

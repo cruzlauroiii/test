@@ -1,8 +1,8 @@
 @page "/staff/edit/{id:int}"
 @using Application.DTOs
-@using Application.UseCases.Staff
+@using BlazorWebApp.Client.Services
 @using Domain.Interfaces
-@inject StaffService StaffService
+@inject ClientStaffService StaffService
 @inject IRoleRepository RoleRepository
 @inject NavigationManager Navigation
 @attribute [Authorize]

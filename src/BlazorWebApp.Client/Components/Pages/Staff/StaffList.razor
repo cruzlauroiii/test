@@ -1,8 +1,7 @@
 @page "/staff"
 @using Application.DTOs
-@using Application.UseCases.Staff
-@using Domain.Entities
-@inject StaffService StaffService
+@using BlazorWebApp.Client.Services
+@inject ClientStaffService StaffService
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 @attribute [Authorize]

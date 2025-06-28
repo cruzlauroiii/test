@@ -1,7 +1,7 @@
 @page "/login"
 @using Application.DTOs
-@using Application.UseCases.Auth
-@inject Application.UseCases.Auth.AuthService AuthService
+@using BlazorWebApp.Client.Services
+@inject ClientAuthService AuthService
 @inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
 
@@ -64,10 +64,10 @@
 
         try
         {
-            var token = await AuthService.LoginAsync(loginDto);
-            if (!string.IsNullOrEmpty(token))
+            var response = await AuthService.LoginAsync(loginDto);
+            if (!string.IsNullOrEmpty(response.Token))
             {
-                await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", token);
+                await JSRuntime.InvokeVoidAsync("localStorage.setItem", "authToken", response.Token);
                 Navigation.NavigateTo("/staff");
             }
             else

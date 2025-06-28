@@ -22,66 +22,6 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Auth/Login.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BdXRoL0xvZ2luLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Error.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Operations/Broker.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcGVyYXRpb25zL0Jyb2tlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Operations/Driver.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcGVyYXRpb25zL0RyaXZlci5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Operations/Forklift.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcGVyYXRpb25zL0ZvcmtsaWZ0LnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Operations/Fumigation.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcGVyYXRpb25zL0Z1bWlnYXRpb24ucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Operations/ITV.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9PcGVyYXRpb25zL0lUVi5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Roles/CreateRole.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Sb2xlcy9DcmVhdGVSb2xlLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Roles/EditRole.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Sb2xlcy9FZGl0Um9sZS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Roles/RoleList.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Sb2xlcy9Sb2xlTGlzdC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Staff/ChangePassword.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TdGFmZi9DaGFuZ2VQYXNzd29yZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Staff/CreateStaff.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TdGFmZi9DcmVhdGVTdGFmZi5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Staff/EditStaff.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TdGFmZi9FZGl0U3RhZmYucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[/home/runner/work/test/test/src/BlazorWebApp/Components/Pages/Staff/StaffList.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9TdGFmZi9TdGFmZkxpc3QucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [/home/runner/work/test/test/src/BlazorWebApp/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
