@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Application.Interfaces;
 using Infrastructure.UseCases.Staff;
 using Infrastructure.UseCases.Auth;
@@ -24,6 +25,10 @@ public class Program
 
         // Configure HttpClient
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+        // Configure client-side database (In-Memory for WebAssembly)
+        builder.Services.AddDbContext<Infrastructure.Data.ClientDbContext>(options =>
+            options.UseInMemoryDatabase("ClientDb"));
 
         // Add authorization with policies
         builder.Services.ConfigureWebsiteDependencies();

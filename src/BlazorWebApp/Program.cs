@@ -25,6 +25,9 @@ public class Program
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
 
+        // Add API Controllers
+        builder.Services.AddControllers();
+
         // Database
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=staff.db"));
@@ -98,6 +101,9 @@ public class Program
             .AddInteractiveServerRenderMode()
             .AddInteractiveWebAssemblyRenderMode()
             .AddAdditionalAssemblies(typeof(BlazorWebApp.Client._Imports).Assembly);
+
+        // Map API Controllers
+        app.MapControllers();
 
         // Ensure database is created
         using (var scope = app.Services.CreateScope())
