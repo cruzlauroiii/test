@@ -1,7 +1,7 @@
 using Application.DTOs;
 using Domain.Interfaces;
 
-namespace Application.UseCases.Auth;
+namespace Application.Services;
 
 public class AuthService
 {

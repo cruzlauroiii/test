@@ -1,9 +1,9 @@
 using Application.DTOs;
-using Application.Interfaces.Services;
+
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Infrastructure.Services;
+namespace Application.Services;
 
 public class MembershipService
 {

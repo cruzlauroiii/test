@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Security.Claims;
 using Domain.Interfaces;
-using Infrastructure.Services;
+using Application.Services;
 
 namespace Infrastructure.Services;
 
