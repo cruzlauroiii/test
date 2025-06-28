@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "87CJZykvEnJPntGXCQuHhzszqvT+YU54zY42snso6mm1E87bWci+1f/gYfw2PxvXM8bnouxwWbBmgjmijN1Ezw==",
+  "success": true,
+  "projectFilePath": "/home/runner/work/test/test/src/SharedUI/SharedUI.csproj",
+  "expectedPackageFiles": [
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.authorization/8.0.17/microsoft.aspnetcore.authorization.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.components/8.0.17/microsoft.aspnetcore.components.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.components.analyzers/8.0.17/microsoft.aspnetcore.components.analyzers.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.components.forms/8.0.17/microsoft.aspnetcore.components.forms.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.components.web/8.0.17/microsoft.aspnetcore.components.web.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.aspnetcore.metadata/8.0.17/microsoft.aspnetcore.metadata.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection/8.0.1/microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.2/microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.3/microsoft.extensions.logging.abstractions.8.0.3.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.options/8.0.2/microsoft.extensions.options.8.0.2.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/microsoft.jsinterop/8.0.17/microsoft.jsinterop.8.0.17.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.io.pipelines/8.0.0/system.io.pipelines.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
