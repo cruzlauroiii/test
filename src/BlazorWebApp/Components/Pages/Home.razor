@@ -1,0 +1,118 @@
+@page "/"
+
+<PageTitle>Staff Management System</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+                <h1 class="display-4">Staff Management System</h1>
+                <p class="lead">A comprehensive Blazor application for managing staff with role-based access control.</p>
+                <hr class="my-4">
+                <p>This system provides secure staff management with specialized operations for different roles including Broker, Driver, Forklift, Fumigation, and ITV operations.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-people-fill"></i> Staff Management</h5>
+                    <p class="card-text">Complete CRUD operations for staff members including role assignment and password management.</p>
+                    <AuthorizeView>
+                        <Authorized>
+                            <a href="/staff" class="btn btn-primary">Manage Staff</a>
+                        </Authorized>
+                        <NotAuthorized>
+                            <a href="/login" class="btn btn-outline-primary">Login Required</a>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-shield-check"></i> Role-Based Access</h5>
+                    <p class="card-text">Secure access control with specialized pages for each role type in the organization.</p>
+                    <AuthorizeView>
+                        <Authorized>
+                            <div class="d-flex flex-wrap gap-2">
+                                <AuthorizeView Roles="Broker">
+                                    <Authorized Context="brokerCtx">
+                                        <a href="/broker" class="btn btn-sm btn-outline-success">Broker</a>
+                                    </Authorized>
+                                </AuthorizeView>
+                                <AuthorizeView Roles="Driver">
+                                    <Authorized Context="driverCtx">
+                                        <a href="/driver" class="btn btn-sm btn-outline-info">Driver</a>
+                                    </Authorized>
+                                </AuthorizeView>
+                                <AuthorizeView Roles="Forklift">
+                                    <Authorized Context="forkliftCtx">
+                                        <a href="/forklift" class="btn btn-sm btn-outline-warning">Forklift</a>
+                                    </Authorized>
+                                </AuthorizeView>
+                                <AuthorizeView Roles="Fumigation">
+                                    <Authorized Context="fumigationCtx">
+                                        <a href="/fumigation" class="btn btn-sm btn-outline-danger">Fumigation</a>
+                                    </Authorized>
+                                </AuthorizeView>
+                                <AuthorizeView Roles="ITV">
+                                    <Authorized Context="itvCtx">
+                                        <a href="/itv" class="btn btn-sm btn-outline-secondary">ITV</a>
+                                    </Authorized>
+                                </AuthorizeView>
+                            </div>
+                        </Authorized>
+                        <NotAuthorized>
+                            <a href="/login" class="btn btn-outline-primary">Login to Access</a>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-gear-fill"></i> System Features</h5>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Clean Architecture</li>
+                                <li><i class="bi bi-check-circle text-success"></i> SQLite Database</li>
+                                <li><i class="bi bi-check-circle text-success"></i> JWT Authentication</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Role-Based Authorization</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Password Management</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Blazor WebAssembly</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Responsive Design</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Real-time Updates</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Entity Framework Core</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <ul class="list-unstyled">
+                                <li><i class="bi bi-check-circle text-success"></i> Domain-Driven Design</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Repository Pattern</li>
+                                <li><i class="bi bi-check-circle text-success"></i> Dependency Injection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

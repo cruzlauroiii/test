@@ -1,0 +1,151 @@
+@page "/staff"
+@using Application.DTOs
+@using Application.UseCases.Staff
+@using Domain.Entities
+@inject StaffService StaffService
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@attribute [Authorize]
+
+<PageTitle>Staff Management</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Staff Management</h2>
+                <div>
+                    <button class="btn btn-primary" @onclick="ShowCreateModal">
+                        <i class="fas fa-plus"></i> Add Staff
+                    </button>
+                    <button class="btn btn-outline-secondary ms-2" @onclick="LoadStaff">
+                        <i class="fas fa-refresh"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            @if (isLoading)
+            {
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Roles</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var staff in staffList)
+                            {
+                                <tr>
+                                    <td>@staff.Id</td>
+                                    <td>@staff.Username</td>
+                                    <td>@staff.FirstName @staff.LastName</td>
+                                    <td>@staff.Email</td>
+                                    <td>
+                                        @foreach (var role in staff.Roles)
+                                        {
+                                            <span class="badge bg-secondary me-1">@role</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span class="badge @(staff.IsActive ? "bg-success" : "bg-danger")">
+                                            @(staff.IsActive ? "Active" : "Inactive")
+                                        </span>
+                                    </td>
+                                    <td>@staff.CreatedAt.ToString("yyyy-MM-dd")</td>
+                                    <td>@(staff.LastLoginAt?.ToString("yyyy-MM-dd HH:mm") ?? "Never")</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" @onclick="() => ShowEditModal(staff)">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-warning ms-1" @onclick="() => ShowChangePasswordModal(staff)">
+                                            <i class="fas fa-key"></i> Password
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger ms-1" @onclick="() => DeleteStaff(staff.Id)">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<StaffDto> staffList = new();
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadStaff();
+    }
+
+    private async Task LoadStaff()
+    {
+        isLoading = true;
+        try
+        {
+            var staff = await StaffService.GetAllStaffAsync();
+            staffList = staff.ToList();
+        }
+        catch (Exception ex)
+        {
+            // Handle error
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void ShowCreateModal()
+    {
+        Navigation.NavigateTo("/staff/create");
+    }
+
+    private void ShowEditModal(StaffDto staff)
+    {
+        Navigation.NavigateTo($"/staff/edit/{staff.Id}");
+    }
+
+    private void ShowChangePasswordModal(StaffDto staff)
+    {
+        Navigation.NavigateTo($"/staff/change-password/{staff.Id}");
+    }
+
+    private async Task DeleteStaff(int id)
+    {
+        if (await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this staff member?"))
+        {
+            try
+            {
+                await StaffService.DeleteStaffAsync(id);
+                await LoadStaff();
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+        }
+    }
+}
