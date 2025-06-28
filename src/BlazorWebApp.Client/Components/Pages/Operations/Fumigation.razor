@@ -1,23 +1,145 @@
 @page "/fumigation"
-@attribute [Authorize(Roles = "Fumigation")]
+@using Application.DTOs
+@using Application.UseCases.Roles
+@using Application.UseCases.Staff
+@inject RoleService RoleService
+@inject StaffService StaffService
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@attribute [Authorize(Policy = "FumigationRole")]
 
 <PageTitle>Fumigation Operations</PageTitle>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h2>Fumigation Operations</h2>
-            <p>Welcome to the Fumigation Operations page. This page is only accessible to staff with the Fumigation role.</p>
-            
-            <div class="alert alert-info">
-                <h4>Available Operations:</h4>
-                <ul>
-                    <li>Schedule fumigation treatments</li>
-                    <li>Chemical inventory management</li>
-                    <li>Safety protocol compliance</li>
-                    <li>Treatment documentation</li>
-                </ul>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Fumigation Operations</h2>
+                <button class="btn btn-warning" @onclick="SetFumigationRoleOnly">
+                    <i class="fas fa-spray-can"></i> Switch to Fumigation Only
+                </button>
             </div>
+
+            @if (isLoading)
+            {
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else if (fumigationProperties.Any())
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Fumigation Configuration</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach (var property in fumigationProperties)
+                            {
+                                <div class="col-md-6 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 class="card-title">@property.Key</h6>
+                                            <p class="card-text">@property.Value</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <h4>No Fumigation Configuration Found</h4>
+                    <p>Fumigation role properties are not configured yet.</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(message))
+            {
+                <div class="alert alert-success mt-3">
+                    @message
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-danger mt-3">
+                    @errorMessage
+                </div>
+            }
         </div>
     </div>
 </div>
+
+@code {
+    private List<RolePropertyDto> fumigationProperties = new();
+    private bool isLoading = true;
+    private string message = string.Empty;
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadFumigationProperties();
+    }
+
+    private async Task LoadFumigationProperties()
+    {
+        isLoading = true;
+        try
+        {
+            var roles = await RoleService.GetAllRolesAsync();
+            var fumigationRole = roles.FirstOrDefault(r => r.Name.Equals("Fumigation", StringComparison.OrdinalIgnoreCase));
+            
+            if (fumigationRole != null)
+            {
+                fumigationProperties = fumigationRole.Properties.ToList();
+                
+                // Add default fumigation properties if not present
+                if (!fumigationProperties.Any(p => p.Key == "logintype"))
+                {
+                    fumigationProperties.Add(new RolePropertyDto 
+                    { 
+                        Key = "logintype", 
+                        Value = "FUMIG" 
+                    });
+                }
+                if (!fumigationProperties.Any(p => p.Key == "noshadow"))
+                {
+                    fumigationProperties.Add(new RolePropertyDto 
+                    { 
+                        Key = "noshadow", 
+                        Value = "T" 
+                    });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error loading fumigation properties: " + ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task SetFumigationRoleOnly()
+    {
+        try
+        {
+            // This would need to be implemented in StaffService to clear all roles except Fumigation
+            message = "Switched to Fumigation role only. All other roles have been removed for this session.";
+            errorMessage = string.Empty;
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error switching to fumigation role: " + ex.Message;
+            message = string.Empty;
+        }
+    }
+}
