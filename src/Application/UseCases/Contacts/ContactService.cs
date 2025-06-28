@@ -1,3 +1,4 @@
+using Application.DTOs;
 using Domain.Entities;
 using Domain.Interfaces;
 
@@ -12,28 +13,58 @@ public class ContactService
         _contactRepository = contactRepository;
     }
 
-    public async Task<IEnumerable<Contact>> GetAllContactsAsync()
+    public async Task<IEnumerable<ContactDto>> GetAllContactsAsync()
     {
-        return await _contactRepository.GetAllAsync();
+        var contacts = await _contactRepository.GetAllAsync();
+        return contacts.Select(MapToDto);
     }
 
-    public async Task<Contact?> GetContactByIdAsync(int id)
+    public async Task<ContactDto?> GetContactByIdAsync(int id)
     {
-        return await _contactRepository.GetByIdAsync(id);
+        var contact = await _contactRepository.GetByIdAsync(id);
+        return contact != null ? MapToDto(contact) : null;
     }
 
-    public async Task<Contact> CreateContactAsync(Contact contact)
+    public async Task<ContactDto> CreateContactAsync(CreateContactDto dto)
     {
-        return await _contactRepository.CreateAsync(contact);
+        var contact = new Contact
+        {
+            AssignedCompany = dto.AssignedCompany,
+            Company = dto.Company,
+            CompanyGroup = dto.CompanyGroup
+        };
+
+        var createdContact = await _contactRepository.CreateAsync(contact);
+        return MapToDto(createdContact);
     }
 
-    public async Task<Contact> UpdateContactAsync(Contact contact)
+    public async Task<ContactDto> UpdateContactAsync(UpdateContactDto dto)
     {
-        return await _contactRepository.UpdateAsync(contact);
+        var contact = await _contactRepository.GetByIdAsync(dto.Id);
+        if (contact == null)
+            throw new ArgumentException("Contact not found");
+
+        contact.AssignedCompany = dto.AssignedCompany;
+        contact.Company = dto.Company;
+        contact.CompanyGroup = dto.CompanyGroup;
+
+        var updatedContact = await _contactRepository.UpdateAsync(contact);
+        return MapToDto(updatedContact);
     }
 
     public async Task<bool> DeleteContactAsync(int id)
     {
         return await _contactRepository.DeleteAsync(id);
+    }
+
+    private static ContactDto MapToDto(Contact contact)
+    {
+        return new ContactDto
+        {
+            Id = contact.Id,
+            AssignedCompany = contact.AssignedCompany,
+            Company = contact.Company,
+            CompanyGroup = contact.CompanyGroup
+        };
     }
 }

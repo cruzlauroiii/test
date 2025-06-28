@@ -1,0 +1,143 @@
+@page "/memberships"
+@using Application.DTOs
+@using Application.UseCases.Memberships
+@using Domain.Entities
+@inject MembershipService MembershipService
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@attribute [Authorize]
+
+<PageTitle>Membership Management</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Membership Management</h2>
+                <div>
+                    <a href="/memberships/create" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Membership
+                    </a>
+                    <button class="btn btn-outline-secondary ms-2" @onclick="LoadMemberships">
+                        <i class="fas fa-refresh"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            @if (isLoading)
+            {
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Membership No</th>
+                                <th>Member ID</th>
+                                <th>Membership Type</th>
+                                <th>Remote Staff ID</th>
+                                <th>Company</th>
+                                <th>Primary Company</th>
+                                <th>Company Group</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var membership in memberships)
+                            {
+                                <tr>
+                                    <td>@membership.Id</td>
+                                    <td>@membership.MembershipNo</td>
+                                    <td>@membership.MemberId</td>
+                                    <td>@membership.MembershipType</td>
+                                    <td>@membership.RemoteStaffId</td>
+                                    <td>@membership.Company</td>
+                                    <td>@membership.PrimaryCompany</td>
+                                    <td>@membership.CompanyGroup</td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <a href="/memberships/edit/@membership.Id" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <button class="btn btn-sm btn-outline-danger" @onclick="() => DeleteMembership(membership.Id)">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @if (!memberships.Any())
+                    {
+                        <div class="text-center py-4">
+                            <p class="text-muted">No memberships found.</p>
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-danger mt-3">
+                    @errorMessage
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<MembershipDto> memberships = new();
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMemberships();
+    }
+
+    private async Task LoadMemberships()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+
+        try
+        {
+            var result = await MembershipService.GetAllMembershipsAsync();
+            memberships = result.ToList();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Failed to load memberships.";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteMembership(int id)
+    {
+        if (await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to delete this membership?"))
+        {
+            try
+            {
+                await MembershipService.DeleteMembershipAsync(id);
+                await LoadMemberships();
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Failed to delete membership.";
+            }
+        }
+    }
+}
