@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Components.Authorization;
-using Application.Services;
 
 namespace BlazorWebApp.Client;
 
@@ -19,17 +18,6 @@ public class Program
         // Add authorization with policies
         builder.Services.ConfigureWebsiteDependencies();
         builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-
-        // Add application services  
-        builder.Services.AddScoped<StaffService>();
-        builder.Services.AddScoped<AuthService>();
-        builder.Services.AddScoped<RoleService>();
-        builder.Services.AddScoped<MembershipService>();
-        builder.Services.AddScoped<MembershipTypeService>();
-        builder.Services.AddScoped<ContactService>();
-        builder.Services.AddScoped<AssociatedCompanyService>();
-        builder.Services.AddScoped<IPadUserOptionService>();
-        builder.Services.AddScoped<DeliveryPreStartService>();
 
         await builder.Build().RunAsync();
     }
