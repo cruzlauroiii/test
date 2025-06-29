@@ -1,9 +1,9 @@
-namespace Domain.Entities;
+namespace Domain.BusinessObjects;
 
 public class DeliveryPreStart
 {
     public int Id { get; set; }
-    public int PreStartId { get; set; }
+    public int PreStartId { get; set; } // Referenced by iPadUserOptions.CurrentPreStartID
     public string WorkCompany { get; set; } = string.Empty;
     public string TruckId { get; set; } = string.Empty;
     public string TrailerId { get; set; } = string.Empty;

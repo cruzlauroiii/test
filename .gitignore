@@ -25,11 +25,13 @@ bld/
 [Oo]bj/
 [Ll]og/
 
-# Explicitly ignore bin and obj folders
+# Explicitly ignore bin and obj folders and dll files
 bin/
 obj/
 **/bin/
 **/obj/
+*.dll
+*.pdb
 
 # .NET Core
 project.lock.json

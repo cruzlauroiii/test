@@ -1,0 +1,126 @@
+@page "/contacts"
+@using Application.Interfaces
+@using Domain.DTOs
+@using Microsoft.AspNetCore.Authorization
+@inject IContactService ContactService
+@inject NavigationManager Navigation
+@attribute [Authorize]
+
+<PageTitle>Contacts</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Contacts Management</h1>
+                <button type="button" @onclick="CreateContact" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create Contact
+                </button>
+            </div>
+
+            @if (contacts == null)
+            {
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            }
+            else if (!contacts.Any())
+            {
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> No contacts found. Create your first contact!
+                </div>
+            }
+            else
+            {
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Company</th>
+                                        <th>Assigned Company</th>
+                                        <th>Company Group</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var contact in contacts)
+                                    {
+                                        <tr>
+                                            <td>@contact.Id</td>
+                                            <td>@contact.Company</td>
+                                            <td>@contact.AssignedCompany</td>
+                                            <td>@contact.CompanyGroup</td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" @onclick="() => EditContact(contact.Id)" class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </button>
+                                                    <button type="button" @onclick="() => DeleteContact(contact.Id)" class="btn btn-sm btn-outline-danger">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private IEnumerable<ContactDto>? contacts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadContacts();
+    }
+
+    private async Task LoadContacts()
+    {
+        try
+        {
+            contacts = await ContactService.GetAllContactsAsync();
+        }
+        catch (Exception ex)
+        {
+            // Handle error
+            contacts = new List<ContactDto>();
+        }
+    }
+
+    private void CreateContact()
+    {
+        Navigation.NavigateTo("/contacts/create");
+    }
+
+    private void EditContact(int id)
+    {
+        Navigation.NavigateTo($"/contacts/edit/{id}");
+    }
+
+    private async Task DeleteContact(int id)
+    {
+        try
+        {
+            var result = await ContactService.DeleteContactAsync(id);
+            if (result)
+            {
+                await LoadContacts();
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle error
+        }
+    }
+}

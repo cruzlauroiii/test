@@ -1,6 +1,6 @@
 using Domain.DTOs;
 using Application.Interfaces;
-using Domain.Entities;
+using Domain.BusinessObjects;
 using Domain.Interfaces;
 
 namespace Infrastructure.Services.UseCases.Staff;
@@ -37,7 +37,7 @@ public class StaffService : IStaffService
 
         var passwordHash = await _authService.HashPasswordAsync(dto.Password);
         
-        var staff = new Domain.Entities.Staff
+        var staff = new Domain.BusinessObjects.Staff
         {
             Username = dto.Username,
             PasswordHash = passwordHash,
@@ -107,7 +107,7 @@ public class StaffService : IStaffService
         return true;
     }
 
-    private static StaffDto MapToDto(Domain.Entities.Staff staff)
+    private static StaffDto MapToDto(Domain.BusinessObjects.Staff staff)
     {
         return new StaffDto
         {

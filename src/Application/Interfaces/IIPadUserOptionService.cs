@@ -1,4 +1,4 @@
-using Domain.Entities;
+using Domain.BusinessObjects;
 
 namespace Application.Interfaces;
 

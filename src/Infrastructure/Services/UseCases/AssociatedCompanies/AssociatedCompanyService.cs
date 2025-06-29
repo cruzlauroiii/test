@@ -1,5 +1,5 @@
 using Application.Interfaces;
-using Domain.Entities;
+using Domain.BusinessObjects;
 using Domain.Interfaces;
 
 namespace Infrastructure.Services.UseCases.AssociatedCompanies;

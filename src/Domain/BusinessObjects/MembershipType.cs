@@ -1,10 +1,10 @@
-namespace Domain.Entities;
+namespace Domain.BusinessObjects;
 
 public class MembershipType
 {
     public int Id { get; set; }
     public string MembershipTypeName { get; set; } = string.Empty;
-    public int RemoteStaffId { get; set; }
+    public int RemoteStaffId { get; set; } // Foreign key to staff.staffid
     
     // Navigation properties
     public Staff Staff { get; set; } = null!;
