@@ -33,9 +33,9 @@ public class AssociatedCompaniesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateAssociatedCompanyDto companyDto)
+    public async Task<IActionResult> Create([FromBody] CreateAssociatedCompany companyDto)
     {
-        var company = new AssociatedCompany
+        var company = new Domain.BusinessObjects.AssociatedCompany
         {
             IdAssociatedCompany = companyDto.IdAssociatedCompany,
             Bactive = companyDto.Bactive,
@@ -51,7 +51,7 @@ public class AssociatedCompaniesController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateAssociatedCompanyDto companyDto)
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateAssociatedCompany companyDto)
     {
         if (id != companyDto.IdAssociatedCompany)
             return BadRequest();

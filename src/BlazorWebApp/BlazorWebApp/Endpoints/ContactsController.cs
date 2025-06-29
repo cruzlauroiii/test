@@ -33,9 +33,9 @@ public class ContactsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateContactDto contactDto)
+    public async Task<IActionResult> Create([FromBody] CreateContact contactDto)
     {
-        var contact = new Contact
+        var contact = new Domain.BusinessObjects.Contact
         {
             Company = contactDto.Company,
             FirstName = contactDto.FirstName,
@@ -51,7 +51,7 @@ public class ContactsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateContactDto contactDto)
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateContact contactDto)
     {
         if (id != contactDto.Id)
             return BadRequest();
