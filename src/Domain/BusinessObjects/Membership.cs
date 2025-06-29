@@ -5,9 +5,9 @@ public class Membership
     public int Id { get; set; }
     public string MembershipNo { get; set; } = string.Empty;
     public string MemberPassword { get; set; } = string.Empty;
-    public int MemberId { get; set; }
+    public int MemberId { get; set; } // Foreign key to contacts.id
     public string MembershipType { get; set; } = string.Empty;
-    public int RemoteStaffId { get; set; }
+    public int RemoteStaffId { get; set; } // Foreign key to staff.staffid
     public string Company { get; set; } = string.Empty;
     public string PrimaryCompany { get; set; } = string.Empty;
     public string CompanyGroup { get; set; } = string.Empty;

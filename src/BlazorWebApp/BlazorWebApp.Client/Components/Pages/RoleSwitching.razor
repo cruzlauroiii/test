@@ -1,0 +1,158 @@
+@page "/role-switching"
+@using Application.Interfaces
+@using Domain.Interfaces
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@inject ISessionService SessionService
+@inject IRoleService RoleService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager Navigation
+
+<PageTitle>Role Switching</PageTitle>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Switch Role</h3>
+                </div>
+                <div class="card-body">
+                    @if (availableRoles?.Any() == true)
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">Current Role: <strong>@currentRole</strong></label>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="roleSelect" class="form-label">Select New Role</label>
+                            <select id="roleSelect" @bind="selectedRole" class="form-select">
+                                <option value="">-- Select a Role --</option>
+                                @foreach (var role in availableRoles)
+                                {
+                                    <option value="@role">@role</option>
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="button" @onclick="SwitchRole" 
+                                    class="btn btn-primary" 
+                                    disabled="@(string.IsNullOrEmpty(selectedRole) || selectedRole == currentRole)">
+                                Switch to @selectedRole
+                            </button>
+                            
+                            <button type="button" @onclick="GoToDashboard" class="btn btn-secondary">
+                                Go to Dashboard
+                            </button>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            <p>No roles available for switching.</p>
+                            <button type="button" @onclick="GoToDashboard" class="btn btn-primary">
+                                Go to Dashboard
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string? currentRole;
+    private string? selectedRole;
+    private List<string>? availableRoles;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCurrentRole();
+        await LoadAvailableRoles();
+    }
+
+    private async Task LoadCurrentRole()
+    {
+        currentRole = SessionService.GetCurrentSessionRole();
+    }
+
+    private async Task LoadAvailableRoles()
+    {
+        try
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            if (authState.User.Identity?.IsAuthenticated == true)
+            {
+                var claims = authState.User.Claims;
+                availableRoles = claims
+                    .Where(c => c.Type == "role" || c.Type == System.Security.Claims.ClaimTypes.Role)
+                    .Select(c => c.Value)
+                    .Distinct()
+                    .ToList();
+
+                // Add default roles for staff
+                if (!availableRoles.Any())
+                {
+                    availableRoles = new List<string> { "Broker", "Driver", "Forklift", "Fumigation", "ITV" };
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log error
+            availableRoles = new List<string>();
+        }
+    }
+
+    private async Task SwitchRole()
+    {
+        if (!string.IsNullOrEmpty(selectedRole))
+        {
+            try
+            {
+                await SessionService.SetCurrentRoleOnlyAsync(selectedRole);
+                currentRole = selectedRole;
+                
+                // Navigate to role-specific page
+                var redirectUrl = selectedRole.ToLower() switch
+                {
+                    "broker" => "/operations/broker",
+                    "driver" => "/operations/driver", 
+                    "forklift" => "/operations/forklift",
+                    "fumigation" => "/operations/fumigation",
+                    "itv" => "/operations/itv",
+                    _ => "/"
+                };
+                
+                Navigation.NavigateTo(redirectUrl);
+            }
+            catch (Exception ex)
+            {
+                // Handle error
+            }
+        }
+    }
+
+    private void GoToDashboard()
+    {
+        if (!string.IsNullOrEmpty(currentRole))
+        {
+            var redirectUrl = currentRole.ToLower() switch
+            {
+                "broker" => "/operations/broker",
+                "driver" => "/operations/driver",
+                "forklift" => "/operations/forklift", 
+                "fumigation" => "/operations/fumigation",
+                "itv" => "/operations/itv",
+                _ => "/"
+            };
+            Navigation.NavigateTo(redirectUrl);
+        }
+        else
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+}
