@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities;
+namespace Domain.BusinessObjects;
 
 public class Staff
 {

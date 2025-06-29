@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain.Interfaces;
 using Domain.DTOs;
-using Domain.Entities;
+using Domain.BusinessObjects;
 
 namespace BlazorWebApp.Endpoints;
 

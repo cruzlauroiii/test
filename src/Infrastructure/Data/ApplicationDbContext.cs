@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Domain.Entities;
+using Domain.BusinessObjects;
 using Infrastructure.Data.EntityMapping;
 
 namespace Infrastructure.Data;

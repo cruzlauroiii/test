@@ -110,7 +110,7 @@
     [Parameter] public int Id { get; set; }
 
     private UpdateStaffDto? updateStaffDto;
-    private List<Domain.Entities.Role> availableRoles = new();
+    private List<Domain.BusinessObjects.Role> availableRoles = new();
     private string errorMessage = string.Empty;
     private bool isLoading = true;
     private bool isSaving = false;
