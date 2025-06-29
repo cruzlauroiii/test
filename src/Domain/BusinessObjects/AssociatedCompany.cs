@@ -2,7 +2,7 @@ namespace Domain.BusinessObjects;
 
 public class AssociatedCompany
 {
-    public required int IdAssociatedCompany { get; set; }
+    public int IdAssociatedCompany { get; set; }
     public bool? Bactive { get; set; }
     public string? CompanyLogo { get; set; }
     public string? CompanyReportlogo { get; set; }

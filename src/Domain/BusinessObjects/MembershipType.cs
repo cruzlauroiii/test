@@ -5,7 +5,7 @@ public class MembershipType
     public int Id { get; set; }
     public int MembershipTypeId { get; set; }
     public string? Active { get; set; }
-    public required string Company { get; set; }
+    public string Company { get; set; } = string.Empty;
     public int? Membernolength { get; set; }
     public string? Membernoprefix { get; set; }
     public string? MembershipGroupId { get; set; }

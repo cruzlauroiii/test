@@ -4,7 +4,7 @@ public class Membership
 {
     public int Id { get; set; }
     public int MemberId { get; set; }
-    public int MembershipType { get; set; }
+    public int MembershipTypeId { get; set; }
     public bool? BcanApproveCharge { get; set; }
     public bool? BexportCanCancelFumigation { get; set; }
     public string? Cancelledreason { get; set; }
@@ -22,13 +22,20 @@ public class Membership
     public int? Revision { get; set; }
 
     // Backwards compatibility properties
-    public string MemberPassword { get; set; } = string.Empty;
+    public string MembershipType { get; set; } = string.Empty;
     public int RemoteStaffId { get; set; } // Foreign key to staff.staffid
     public string Company { get; set; } = string.Empty;
     public string PrimaryCompany { get; set; } = string.Empty;
     public string CompanyGroup { get; set; } = string.Empty;
     public string MainLogoLocation { get; set; } = string.Empty;
     public string ReportLogoLocation { get; set; } = string.Empty;
+    
+    // Property alias for MemberPassword
+    public string MemberPassword 
+    { 
+        get => Memberpassword ?? string.Empty; 
+        set => Memberpassword = value; 
+    }
     
     // Navigation properties
     public Staff Staff { get; set; } = null!;

@@ -2,7 +2,7 @@ namespace Domain.BusinessObjects;
 
 public class Contact
 {
-    public required int Id { get; set; }
+    public int Id { get; set; }
     public string? Abn { get; set; }
     public string? Accno { get; set; }
     public string? AccountsContactName { get; set; }
@@ -66,7 +66,7 @@ public class Contact
     public decimal? DestRevenuePerContainer { get; set; }
     public decimal? DfullCycleTarget { get; set; }
     public decimal? DmtyCycleTarget { get; set; }
-    public required string Defaultdoorsfacing { get; set; }
+    public string Defaultdoorsfacing { get; set; } = string.Empty;
     public string? DefaultType { get; set; }
     public string? Department { get; set; }
     public string? DisplayName { get; set; }
@@ -94,11 +94,11 @@ public class Contact
     public decimal? Fdebtorbalance90 { get; set; }
     public string? FfFirstName { get; set; }
     public string? FfTitle { get; set; }
-    public required bool Ffeligible { get; set; }
+    public bool Ffeligible { get; set; }
     public string? FfNumber { get; set; }
     public string? FfsurName { get; set; }
     public string? FirstName { get; set; }
-    public required Guid SguId { get; set; }
+    public Guid SguId { get; set; }
     public string? HandlingContactName { get; set; }
     public string? HandlingContactNumber { get; set; }
     public string? Hrm { get; set; }
@@ -109,7 +109,7 @@ public class Contact
     public int? IassignedRepImportSemi { get; set; }
     public int? IassignedRepImportSl { get; set; }
     public int? IassignedRepLocal { get; set; }
-    public required int IclientInvoiceValIdationDay { get; set; }
+    public int IclientInvoiceValIdationDay { get; set; }
     public int? IclientTierLevelId { get; set; }
     public int? IcorrZoneId { get; set; }
     public int? IcsRep { get; set; }
