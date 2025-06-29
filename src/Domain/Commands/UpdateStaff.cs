@@ -1,9 +1,20 @@
-namespace Domain.BusinessObjects;
+using Domain.BusinessObjects;
 
-public class Staff
+namespace Domain.Commands;
+
+public class UpdateStaff
 {
     public int Id { get; set; }
-    public int StaffId { get; set; }
+    public int? StaffId { get; set; }
+    public string? Username { get; set; }
+    public string? Password { get; set; }
+    public string? PrimaryCompany { get; set; }
+    public string? Email { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public bool? IsActive { get; set; }
+    
+    // All other Staff properties
     public int? AccessLevel { get; set; }
     public string? AccountActive { get; set; }
     public string? AccountLocked { get; set; }
@@ -56,8 +67,6 @@ public class Staff
     public string? LwUserName { get; set; }
     public int? MobileDeviceId { get; set; }
     public string? Note { get; set; }
-    public string? Password { get; set; }
-    public string? PrimaryCompany { get; set; }
     public int? Revision { get; set; }
     public string? SaqisAuthNumber { get; set; }
     public string? ScurrentDriverStatus { get; set; }
@@ -73,26 +82,4 @@ public class Staff
     public int? StaffTypeId { get; set; }
     public DateTime? StartDate { get; set; }
     public string? UserName { get; set; }
-
-    // Backwards compatibility properties - use UserName as the primary property
-    public string Username 
-    { 
-        get => UserName ?? string.Empty; 
-        set => UserName = value; 
-    }
-    public string PasswordHash { get; set; } = string.Empty;
-    public string HashedPassword { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public bool IsActive { get; set; } = true;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? LastLoginAt { get; set; }
-    
-    // Navigation properties
-    public StaffOption StaffOption { get; set; } = default!;
-    public ICollection<StaffModule> StaffModules { get; } = new List<StaffModule>();
-    public ICollection<StaffRole> StaffRoles { get; set; } = new List<StaffRole>();
-    public ICollection<Membership> Memberships { get; set; } = new List<Membership>();
-    public IPadUserOption? IPadUserOption { get; set; }
 }
