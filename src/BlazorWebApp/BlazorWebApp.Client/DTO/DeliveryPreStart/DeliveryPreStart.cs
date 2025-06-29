@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.DeliveryPreStart;
 
-public class DeliveryPreStartDto
+public class DeliveryPreStart
 {
     public int Id { get; set; }
     public int PreStartId { get; set; }

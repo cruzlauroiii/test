@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlazorWebApp.Client.DTO.DeliveryPreStart;
 
-public class CreateDeliveryPreStartDto
+public class CreateDeliveryPreStart
 {
     [Required]
     public int PreStartId { get; set; }

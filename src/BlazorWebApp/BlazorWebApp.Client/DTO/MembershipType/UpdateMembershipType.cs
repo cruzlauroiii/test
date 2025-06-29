@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlazorWebApp.Client.DTO.MembershipType;
 
-public class UpdateMembershipTypeDto
+public class UpdateMembershipType
 {
     public int Id { get; set; }
     

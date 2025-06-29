@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.IPadUserOption;
 
-public class UpdateIPadUserOptionDto
+public class UpdateIPadUserOption
 {
     public int IdiPadUserOption { get; set; }
     public int? IstaffId { get; set; }

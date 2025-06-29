@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.MembershipType;
 
-public class MembershipTypeDto
+public class MembershipType
 {
     public int Id { get; set; }
     public string MembershipTypeName { get; set; } = string.Empty;

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlazorWebApp.Client.DTO.Role;
 
-public class UpdateRolePropertyDto
+public class UpdateRoleProperty
 {
     public int Id { get; set; }
     

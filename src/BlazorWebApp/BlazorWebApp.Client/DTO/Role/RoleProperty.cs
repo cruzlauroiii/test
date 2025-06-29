@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.Role;
 
-public class RolePropertyDto
+public class RoleProperty
 {
     public int Id { get; set; }
     public int RoleId { get; set; }

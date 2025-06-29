@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlazorWebApp.Client.DTO.MembershipType;
 
-public class CreateMembershipTypeDto
+public class CreateMembershipType
 {
     [Required]
     [StringLength(50)]

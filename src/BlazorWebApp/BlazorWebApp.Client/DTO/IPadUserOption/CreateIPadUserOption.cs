@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.IPadUserOption;
 
-public class CreateIPadUserOptionDto
+public class CreateIPadUserOption
 {
     public int IdiPadUserOption { get; set; }
     public int? IstaffId { get; set; }

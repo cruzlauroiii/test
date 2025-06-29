@@ -1,8 +1,7 @@
 namespace BlazorWebApp.Client.DTO.Membership;
 
-public class UpdateMembershipDto
+public class CreateMembership
 {
-    public int Id { get; set; }
     public string MembershipNo { get; set; } = string.Empty;
     public string MemberPassword { get; set; } = string.Empty;
     public int MemberId { get; set; }

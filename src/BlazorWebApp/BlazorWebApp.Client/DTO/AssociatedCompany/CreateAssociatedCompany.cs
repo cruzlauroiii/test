@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.AssociatedCompany;
 
-public class CreateAssociatedCompanyDto
+public class CreateAssociatedCompany
 {
     public int IdAssociatedCompany { get; set; }
     public bool? Bactive { get; set; }

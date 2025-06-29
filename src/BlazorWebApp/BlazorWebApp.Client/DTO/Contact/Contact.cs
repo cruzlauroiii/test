@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.Contact;
 
-public class ContactDto
+public class Contact
 {
     public int Id { get; set; }
     public string? Company { get; set; }

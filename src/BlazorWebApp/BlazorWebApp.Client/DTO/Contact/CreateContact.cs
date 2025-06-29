@@ -1,12 +1,11 @@
 namespace BlazorWebApp.Client.DTO.Contact;
 
-public class UpdateContactDto
+public class CreateContact
 {
-    public int Id { get; set; }
-    public string? Defaultdoorsfacing { get; set; }
-    public bool? Ffeligible { get; set; }
-    public Guid? SguId { get; set; }
-    public int? IclientInvoiceValIdationDay { get; set; }
+    public required string Defaultdoorsfacing { get; set; }
+    public required bool Ffeligible { get; set; }
+    public required Guid SguId { get; set; }
+    public required int IclientInvoiceValIdationDay { get; set; }
     
     public string? Company { get; set; }
     public string? FirstName { get; set; }

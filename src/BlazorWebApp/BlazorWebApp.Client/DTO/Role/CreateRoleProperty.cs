@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlazorWebApp.Client.DTO.Role;
 
-public class CreateRolePropertyDto
+public class CreateRoleProperty
 {
     [Required]
     [StringLength(100)]
