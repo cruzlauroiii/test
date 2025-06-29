@@ -35,7 +35,7 @@ public class StaffRepository : IStaffRepository
         return await _context.Staff
             .Include(s => s.StaffRoles)
             .ThenInclude(sr => sr.Role)
-            .FirstOrDefaultAsync(s => s.Username == username);
+            .FirstOrDefaultAsync(s => s.UserName == username);
     }
 
     public async Task<Staff?> GetByStaffIdAsync(int staffId)
@@ -73,7 +73,7 @@ public class StaffRepository : IStaffRepository
 
     public async Task<bool> ExistsAsync(string username)
     {
-        return await _context.Staff.AnyAsync(s => s.Username == username);
+        return await _context.Staff.AnyAsync(s => s.UserName == username);
     }
 
     public async Task<bool> ExistsByStaffIdAsync(int staffId)

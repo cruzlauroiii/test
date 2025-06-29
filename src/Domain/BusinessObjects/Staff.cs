@@ -74,8 +74,12 @@ public class Staff
     public DateTime? StartDate { get; set; }
     public string? UserName { get; set; }
 
-    // Backwards compatibility properties
-    public string Username { get; set; } = string.Empty;
+    // Backwards compatibility properties - use UserName as the primary property
+    public string Username 
+    { 
+        get => UserName ?? string.Empty; 
+        set => UserName = value; 
+    }
     public string PasswordHash { get; set; } = string.Empty;
     public string HashedPassword { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;

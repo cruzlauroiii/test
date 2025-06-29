@@ -39,7 +39,7 @@ public class StaffService : IStaffService
         
         var staff = new Domain.BusinessObjects.Staff
         {
-            Username = dto.Username,
+            UserName = dto.Username,
             PasswordHash = passwordHash,
             Email = dto.Email,
             FirstName = dto.FirstName,
