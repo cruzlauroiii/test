@@ -1,6 +1,6 @@
 namespace BlazorWebApp.Client.DTO.Staff;
 
-public class UpdateStaffDto
+public class Staff
 {
     public int Id { get; set; }
     public int StaffId { get; set; }
@@ -12,5 +12,7 @@ public class UpdateStaffDto
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public bool IsActive { get; set; }
-    public List<int> RoleIds { get; set; } = new();
+    public DateTime CreatedAt { get; set; }
+    public DateTime? LastLoginAt { get; set; }
+    public List<string> Roles { get; set; } = new();
 }
