@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedUI", "src\SharedUI\SharedUI.csproj", "{1269EC7F-67DC-44EC-80C2-BD5D5B560B1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebApp", "src\BlazorWebApp\BlazorWebApp.csproj", "{0EB13744-A102-466C-91BF-363023E58D67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebApp", "src\BlazorWebApp\BlazorWebApp\BlazorWebApp.csproj", "{0EB13744-A102-466C-91BF-363023E58D67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebApp.Client", "src\BlazorWebApp.Client\BlazorWebApp.Client.csproj", "{0C6F2D77-8D72-493E-83A0-7862FC353F24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWebApp.Client", "src\BlazorWebApp\BlazorWebApp.Client\BlazorWebApp.Client.csproj", "{0C6F2D77-8D72-493E-83A0-7862FC353F24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
