@@ -1,15 +1,15 @@
-using Domain.DTOs;
+using BlazorWebApp.Client.DTO.Role;
 
 namespace Application.Interfaces;
 
 public interface IRoleService
 {
-    Task<IEnumerable<RoleDto>> GetAllRolesAsync();
-    Task<RoleDto?> GetRoleByIdAsync(int id);
-    Task<RoleDto> CreateRoleAsync(CreateRoleDto dto);
-    Task<RoleDto> UpdateRoleAsync(UpdateRoleDto dto);
+    Task<IEnumerable<Role>> GetAllRolesAsync();
+    Task<Role?> GetRoleByIdAsync(int id);
+    Task<Role> CreateRoleAsync(CreateRole dto);
+    Task<Role> UpdateRoleAsync(UpdateRole dto);
     Task<bool> DeleteRoleAsync(int id);
-    Task<RolePropertyDto> AddRolePropertyAsync(int roleId, CreateRolePropertyDto dto);
-    Task<RolePropertyDto> UpdateRolePropertyAsync(UpdateRolePropertyDto dto);
+    Task<RoleProperty> AddRolePropertyAsync(int roleId, CreateRoleProperty dto);
+    Task<RoleProperty> UpdateRolePropertyAsync(UpdateRoleProperty dto);
     Task<bool> DeleteRolePropertyAsync(int propertyId);
 }

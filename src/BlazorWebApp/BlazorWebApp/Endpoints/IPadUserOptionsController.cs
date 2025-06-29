@@ -42,9 +42,9 @@ public class IPadUserOptionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateIPadUserOptionDto optionDto)
+    public async Task<IActionResult> Create([FromBody] CreateIPadUserOption optionDto)
     {
-        var option = new IPadUserOption
+        var option = new Domain.BusinessObjects.IPadUserOption
         {
             IdiPadUserOption = optionDto.IdiPadUserOption,
             IstaffId = optionDto.IstaffId,
@@ -59,7 +59,7 @@ public class IPadUserOptionsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UpdateIPadUserOptionDto optionDto)
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateIPadUserOption optionDto)
     {
         if (id != optionDto.IdiPadUserOption)
             return BadRequest();
