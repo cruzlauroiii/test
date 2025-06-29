@@ -1,8 +1,8 @@
-using BlazorWebApp.Client.DTO.Staff;
+using Domain.DTOs;
 
 namespace Application.Interfaces;
 
 public interface IAuthApplicationService
 {
-    Task<string?> LoginAsync(Login dto);
+    Task<string?> LoginAsync(LoginDto dto);
 }
